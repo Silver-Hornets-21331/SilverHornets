@@ -13,6 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const protectImage = (img) => {
         img.addEventListener('contextmenu', (e) => e.preventDefault());
         img.addEventListener('dragstart', (e) => e.preventDefault());
+        
+        // CSS protections for mobile (iOS/Android)
+        img.style.webkitTouchCallout = 'none'; // Disable iOS long-press menu
+        img.style.userSelect = 'none';         // specific for turning off selection
+        img.style.webkitUserSelect = 'none';   // for Safari/Chrome
     };
 
     // Protect the lightbox image
