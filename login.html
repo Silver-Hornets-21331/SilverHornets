@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Login - Silver Hornets FTC Team 21331</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img class="logo-image" src="images/2025-04-28%20-%20SIlver%20Hornets%20Logo.png" alt="Silver Hornets logo">
+                <span>Silver Hornets</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="sponsors.html">Sponsors</a></li>
+                <li><a href="outreach.html">Outreach</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html" class="active">Member Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1>Member Login</h1>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <div class="notice warning" style="margin-bottom: 2rem; padding: 1rem; background: #fff3cd; border: 2px solid #ffc107; border-radius: 8px; color: #856404;">
+                <p style="margin: 0; font-weight: 600;">⚠️ Work in Progress</p>
+                <p style="margin: 0.5rem 0 0 0; font-size: 0.95rem;">This member login feature is currently under testing. Please contact your coach if you experience any issues.</p>
+            </div>
+            <div class="auth-card">
+                <h2>Welcome back</h2>
+                <p class="muted">Sign in to log your hours. New members can create an account.</p>
+
+                <form id="login-form" class="stacked-form">
+                    <div class="form-group">
+                        <label for="login-email">Email *</label>
+                        <input type="email" id="login-email" name="email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password *</label>
+                        <input type="password" id="login-password" name="password" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="cta-button">Sign In</button>
+                    <button type="button" class="link-button" id="reset-password">Forgot password?</button>
+                </form>
+
+                <div class="divider"></div>
+
+                <form id="register-form" class="stacked-form">
+                    <h3>Create an account</h3>
+                    <div class="form-group">
+                        <label for="register-name">Full Name *</label>
+                        <input type="text" id="register-name" name="name" placeholder="Your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email *</label>
+                        <input type="email" id="register-email" name="email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Password *</label>
+                        <input type="password" id="register-password" name="password" placeholder="At least 6 characters" minlength="6" required>
+                    </div>
+                    <button type="submit" class="cta-button">Create Account</button>
+                </form>
+
+                <div id="auth-message" class="notice" aria-live="polite"></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="chatbot" data-bot-name="SHBot">
+        <button class="chatbot-toggle" type="button" aria-expanded="false" aria-controls="chatbot-panel">Chat with SHBot</button>
+        <div class="chatbot-panel" id="chatbot-panel" role="dialog" aria-label="SHBot chat" aria-hidden="true">
+            <div class="chatbot-header">
+                <div class="chatbot-header-brand">
+                    <img class="chatbot-logo" src="images/SilverHornet.svg" alt="Silver Hornets logo">
+                    <div>
+                        <p class="chatbot-title">SHBot</p>
+                        <p class="chatbot-subtitle">Ask about the team</p>
+                    </div>
+                </div>
+                <button class="chatbot-close" type="button" aria-label="Close chat">✕</button>
+            </div>
+            <div class="chatbot-messages" aria-live="polite"></div>
+            <form class="chatbot-form" autocomplete="off">
+                <label class="sr-only" for="chatbot-input">Type your message</label>
+                <input class="chatbot-input" id="chatbot-input" name="message" type="text" placeholder="Ask about outreach, sponsors, or meetings" />
+                <button class="chatbot-send" type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Silver Hornets FTC Team 21331. All rights reserved.</p>
+            <p>Committed to FIRST principles and robotics excellence.</p>
+        </div>
+    </footer>
+
+    <script src="js/chatbot.js" defer></script>
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/auth.js"></script>
+</body>
+</html>

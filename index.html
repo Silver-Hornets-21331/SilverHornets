@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silver Hornets - FTC Team 21331</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img class="logo-image" src="images/2025-04-28%20-%20SIlver%20Hornets%20Logo.png" alt="Silver Hornets logo">
+                <span>Silver Hornets</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="sponsors.html">Sponsors</a></li>
+                <li><a href="outreach.html">Outreach</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Member Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero home-hero">
+        <div class="hero-content">
+            <h1>Silver Hornets</h1>
+            <p>FTC Team #21331</p>
+            <p class="tagline">Building robots, building futures</p>
+            <button class="cta-button" onclick="document.getElementById('about').scrollIntoView()">Learn More</button>
+        </div>
+    </header>
+
+    <section id="about" class="section highlights">
+        <div class="container">
+            <h2>Welcome to Silver Hornets</h2>
+            <div class="highlights-grid">
+                <div class="highlight-card">
+                    <div class="icon">⚙️</div>
+                    <h3>Engineering</h3>
+                    <p>Designing and building innovative FTC robots</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="icon">🤝</div>
+                    <h3>Teamwork</h3>
+                    <p>Collaborating with passion and dedication</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="icon">🏆</div>
+                    <h3>Excellence</h3>
+                    <p>Striving for success in every competition</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="icon">💡</div>
+                    <h3>Innovation</h3>
+                    <p>Creating solutions through STEM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section gallery">
+        <div class="container">
+            <h2>Photo Gallery</h2>
+            <p>Moments from build sessions, competitions, and outreach.</p>
+            <div class="gallery-roller" aria-label="Auto-scrolling photo gallery">
+                <div class="gallery-track" data-source="images/gallery/gallery.json"></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="gallery-lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+        <button class="gallery-close" type="button" aria-label="Close photo">✕</button>
+        <figure class="gallery-lightbox-content">
+            <img class="gallery-lightbox-image" src="" alt="">
+            <figcaption class="gallery-lightbox-caption"></figcaption>
+        </figure>
+    </div>
+
+    <div class="chatbot" data-bot-name="SHBot">
+        <button class="chatbot-toggle" type="button" aria-expanded="false" aria-controls="chatbot-panel">Chat with SHBot</button>
+        <div class="chatbot-panel" id="chatbot-panel" role="dialog" aria-label="SHBot chat" aria-hidden="true">
+            <div class="chatbot-header">
+                <div class="chatbot-header-brand">
+                    <img class="chatbot-logo" src="images/SilverHornet.svg" alt="Silver Hornets logo">
+                    <div>
+                        <p class="chatbot-title">SHBot</p>
+                        <p class="chatbot-subtitle">Ask about the team</p>
+                    </div>
+                </div>
+                <button class="chatbot-close" type="button" aria-label="Close chat">✕</button>
+            </div>
+            <div class="chatbot-messages" aria-live="polite"></div>
+            <form class="chatbot-form" autocomplete="off">
+                <label class="sr-only" for="chatbot-input">Type your message</label>
+                <input class="chatbot-input" id="chatbot-input" name="message" type="text" placeholder="Ask about outreach, sponsors, or meetings" />
+                <button class="chatbot-send" type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Silver Hornets FTC Team 21331. All rights reserved.</p>
+            <p>Committed to FIRST principles and robotics excellence.</p>
+        </div>
+    </footer>
+
+    <script src="js/gallery.js" defer></script>
+    <script src="js/chatbot.js" defer></script>
+</body>
+</html>
