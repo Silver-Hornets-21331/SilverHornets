@@ -21,9 +21,23 @@ const showMessage = (text, isError = false) => {
     messageEl.classList.toggle("error", isError);
 };
 
+const setLoadingState = (isLoading, button) => {
+    if (!button) return;
+    button.disabled = isLoading;
+    if (isLoading) {
+        button.dataset.originalText = button.textContent;
+        button.textContent = "Please wait...";
+    } else {
+        button.textContent = button.dataset.originalText || "Submit";
+    }
+};
+
 loginForm?.addEventListener("submit", async (event) => {
     event.preventDefault();
     showMessage("");
+
+    const submitBtn = loginForm.querySelector('button[type="submit"]');
+    setLoadingState(true, submitBtn);
 
     const email = document.getElementById("login-email").value.trim();
     const password = document.getElementById("login-password").value.trim();
@@ -31,15 +45,26 @@ loginForm?.addEventListener("submit", async (event) => {
     try {
         await signInWithEmailAndPassword(auth, email, password);
         showMessage("Signed in! Redirecting...");
-        window.location.href = "hours.html";
+        setTimeout(() => {
+            window.location.href = "hours.html";
+        }, 1500);
     } catch (error) {
-        showMessage(error.message, true);
+        if (error.code === 'auth/invalid-credential') {
+            showMessage("Incorrect email or password.", true);
+        } else {
+            showMessage(error.message, true);
+        }
+    } finally {
+        setLoadingState(false, submitBtn);
     }
 });
 
 registerForm?.addEventListener("submit", async (event) => {
     event.preventDefault();
     showMessage("");
+
+    const submitBtn = registerForm.querySelector('button[type="submit"]');
+    setLoadingState(true, submitBtn);
 
     const name = document.getElementById("register-name").value.trim();
     const email = document.getElementById("register-email").value.trim();
@@ -54,9 +79,13 @@ registerForm?.addEventListener("submit", async (event) => {
             createdAt: new Date().toISOString()
         });
         showMessage("Account created! Redirecting...");
-        window.location.href = "hours.html";
+        setTimeout(() => {
+            window.location.href = "hours.html";
+        }, 1500);
     } catch (error) {
         showMessage(error.message, true);
+    } finally {
+        setLoadingState(false, submitBtn);
     }
 });
 

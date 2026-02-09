@@ -9,6 +9,15 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    // Helper to disable right-click and dragging
+    const protectImage = (img) => {
+        img.addEventListener('contextmenu', (e) => e.preventDefault());
+        img.addEventListener('dragstart', (e) => e.preventDefault());
+    };
+
+    // Protect the lightbox image
+    protectImage(lightboxImage);
+
     const openLightbox = (source, caption, altText) => {
         lightboxImage.src = source;
         lightboxImage.alt = altText || caption || 'Gallery photo';
@@ -41,6 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const image = document.createElement('img');
                 image.src = item.src;
                 image.alt = item.alt || item.caption || 'Gallery photo';
+                
+                // Protect thumbnail
+                protectImage(image);
+                
                 button.appendChild(image);
                 fragment.appendChild(button);
             });
