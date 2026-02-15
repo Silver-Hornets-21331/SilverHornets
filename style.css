@@ -882,6 +882,51 @@ th {
     box-shadow: 0 0 5px rgba(0, 150, 199, 0.3);
 }
 
+/* Password visibility toggle */
+.password-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-field input {
+    flex: 1;
+    padding-right: 3rem;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.25rem;
+    padding: 0.5rem;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+    line-height: 1;
+}
+
+.password-toggle:hover {
+    opacity: 1;
+}
+
+.password-toggle:focus {
+    outline: 2px solid #0096c7;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Email validation styles */
+input[type="email"][aria-invalid="true"] {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 5px rgba(220, 53, 69, 0.3) !important;
+}
+
+input[type="email"]:not([aria-invalid]) {
+    transition: border-color 0.3s ease;
+}
+
 /* Footer */
 .footer {
     background: #023e8a;
