@@ -1,0 +1,83 @@
+{
+  "leadership": [
+    {
+      "name": "Team Captain",
+      "role": "Team Captain",
+      "description": "Leading Silver Hornets with vision and expertise",
+      "image": "images/avatar-placeholder.svg"
+    },
+    {
+      "name": "Team Vice Captain",
+      "role": "Team Vice Captain",
+      "description": "Guiding robot design and mechanical systems",
+      "image": "images/avatar-placeholder.svg"
+    },
+    {
+      "name": "Deshna Maydiga",
+      "role": "Programming Lead",
+      "description": "Developing software and autonomous systems",
+      "image": "images/avatar-placeholder.svg"
+    }
+  ],
+  "members": [
+    {
+      "name": "FirstName LastName",
+      "role": "Mechanical Design",
+      "image": "images/avatar-placeholder.svg"
+    },
+    {
+      "name": "FirstName LastName",
+      "role": "Programming",
+      "image": "images/avatar-placeholder.svg"
+    },
+    {
+      "name": "FirstName LastName",
+      "role": "CAD & Prototyping",
+      "image": "images/avatar-placeholder.svg"
+    },
+    {
+      "name": "FirstName LastName",
+      "role": "Build Lead",
+      "image": "images/avatar-placeholder.svg"
+    },
+    {
+      "name": "FirstName LastName",
+      "role": "Electrical Systems",
+      "image": "images/avatar-placeholder.svg"
+    },
+    {
+      "name": "FirstName LastName",
+      "role": "Driver & Strategy",
+      "image": "images/avatar-placeholder.svg"
+    },
+    {
+      "name": "FirstName LastName",
+      "role": "Business & Outreach",
+      "image": "images/avatar-placeholder.svg"
+    },
+    {
+      "name": "FirstName LastName",
+      "role": "Design & Branding",
+      "image": "images/avatar-placeholder.svg"
+    },
+    {
+      "name": "FirstName LastName",
+      "role": "Notebook & Documentation",
+      "image": "images/avatar-placeholder.svg"
+    }
+  ],
+  "mentors": [
+    {
+      "name": "FirstName LastName",
+      "role": "Lead Mentor",
+      "description": "Supporting the team with guidance and technical insight",
+      "image": "images/avatar-placeholder.svg"
+    },
+    {
+      "name": "FirstName LastName",
+      "role": "Head Coach",
+      "description": "Leading strategy, planning, and competition readiness",
+      "image": "images/avatar-placeholder.svg"
+    }
+  ]
+}
