@@ -16,6 +16,9 @@ const registerForm = document.getElementById("register-form");
 const resetButton = document.getElementById("reset-password");
 const messageEl = document.getElementById("auth-message");
 
+// Valid invite codes for team registration
+const VALID_INVITE_CODES = ["SILVERHORNET2026", "TEAM21331"];
+
 const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -81,7 +84,15 @@ registerForm?.addEventListener("submit", async (event) => {
 
     const name = document.getElementById("register-name").value.trim();
     const email = document.getElementById("register-email").value.trim();
+    const inviteCode = document.getElementById("register-invite").value.trim();
     const password = document.getElementById("register-password").value.trim();
+
+    // Validate invite code
+    if (!VALID_INVITE_CODES.includes(inviteCode.toUpperCase())) {
+        showMessage("Invalid invite code. Contact your coach for the correct code.", true);
+        setLoadingState(false, submitBtn);
+        return;
+    }
 
     // Validate email format
     if (!validateEmail(email)) {
@@ -116,6 +127,7 @@ registerForm?.addEventListener("submit", async (event) => {
         await setDoc(doc(db, "members", credential.user.uid), {
             name,
             email,
+            inviteCode: inviteCode.toUpperCase(),
             createdAt: new Date().toISOString()
         });
         showMessage("Account created! Redirecting...");
