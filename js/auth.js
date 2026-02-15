@@ -4,11 +4,11 @@ import {
     signInWithEmailAndPassword,
     sendPasswordResetEmail,
     updateProfile
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
 import {
     doc,
     setDoc
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
 
 const loginForm = document.getElementById("login-form");
 const registerForm = document.getElementById("register-form");

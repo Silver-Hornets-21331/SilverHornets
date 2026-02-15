@@ -2,7 +2,7 @@ import { auth, db } from "./firebase-config.js";
 import {
     onAuthStateChanged,
     signOut
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
 import {
     addDoc,
     collection,
@@ -13,7 +13,7 @@ import {
     query,
     serverTimestamp,
     where
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
 
 const form = document.getElementById("hours-form");
 const entriesBody = document.getElementById("hours-entries");
