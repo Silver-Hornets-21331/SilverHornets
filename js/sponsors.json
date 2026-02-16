@@ -1,0 +1,70 @@
+{
+  "platinum": [
+    {
+      "name": "Example Tech Corp",
+      "logo": "images/sponsors/platinum-sponsor-1.png",
+      "website": "https://example.com",
+      "description": "Leading technology solutions provider"
+    }
+  ],
+  "gold": [
+    {
+      "name": "Innovation Industries",
+      "logo": "images/sponsors/gold-sponsor-1.png",
+      "website": "https://example.com",
+      "description": "Supporting STEM education"
+    },
+    {
+      "name": "Future Robotics",
+      "logo": "images/sponsors/gold-sponsor-2.png",
+      "website": "https://example.com",
+      "description": "Advancing robotics technology"
+    }
+  ],
+  "silver": [
+    {
+      "name": "Local Business Partners",
+      "logo": "images/sponsors/silver-sponsor-1.png",
+      "website": "https://example.com",
+      "description": "Community supporter"
+    },
+    {
+      "name": "Engineering Solutions LLC",
+      "logo": "images/sponsors/silver-sponsor-2.png",
+      "website": "https://example.com",
+      "description": "Engineering excellence"
+    },
+    {
+      "name": "Tech Academy",
+      "logo": "images/sponsors/silver-sponsor-3.png",
+      "website": "https://example.com",
+      "description": "Education partner"
+    }
+  ],
+  "bronze": [
+    {
+      "name": "Community Supporter 1",
+      "logo": "images/sponsors/bronze-sponsor-1.png",
+      "website": "https://example.com",
+      "description": "Supporting our mission"
+    },
+    {
+      "name": "Community Supporter 2",
+      "logo": "images/sponsors/bronze-sponsor-2.png",
+      "website": "https://example.com",
+      "description": "Building the future"
+    },
+    {
+      "name": "Community Supporter 3",
+      "logo": "images/sponsors/bronze-sponsor-3.png",
+      "website": "https://example.com",
+      "description": "STEM advocate"
+    },
+    {
+      "name": "Community Supporter 4",
+      "logo": "images/sponsors/bronze-sponsor-4.png",
+      "website": "https://example.com",
+      "description": "Youth development"
+    }
+  ]
+}
