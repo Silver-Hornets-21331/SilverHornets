@@ -31,7 +31,7 @@ const adminFilter = document.getElementById("admin-member-filter");
 const adminExportButton = document.getElementById("admin-export");
 
 const ADMIN_EMAILS = [
-    "coach@example.com"
+    "ftc.team.boulan@gmail.com"
 ];
 
 let adminEntries = [];

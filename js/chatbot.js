@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         },
         {
             keywords: ['contact', 'email', 'reach'],
-            reply: 'You can reach us via the Contact page. We are happy to connect with students, mentors, and sponsors.'
+            reply: 'You can reach us at ftc.team.boulan@gmail.com or via the Contact page. We are happy to connect with students, mentors, and sponsors.'
         },
         {
             keywords: ['members', 'join', 'team size', 'how many'],
