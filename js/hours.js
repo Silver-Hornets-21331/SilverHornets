@@ -12,6 +12,7 @@ import {
     orderBy,
     query,
     serverTimestamp,
+    updateDoc,
     where
 } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
 
@@ -66,6 +67,10 @@ const renderEntries = (entries) => {
     entriesBody.innerHTML = "";
 
     entries.forEach((entry) => {
+        const approvalStatus = entry.approved === true ? "✓ Approved" : 
+                              entry.approved === false ? "⏳ Pending" : "⏳ Pending";
+        const statusClass = entry.approved === true ? "approved" : "pending";
+        
         const row = document.createElement("tr");
         row.innerHTML = `
             <td>${entry.date}</td>
@@ -73,6 +78,7 @@ const renderEntries = (entries) => {
             <td><span class="pill">${entry.category}</span></td>
             <td>${entry.duration.toFixed(1)}</td>
             <td>${entry.notes || ""}</td>
+            <td><span class="status-badge ${statusClass}">${approvalStatus}</span></td>
             <td><button class="link-button" data-id="${entry.id}">Delete</button></td>
         `;
         entriesBody.appendChild(row);
@@ -91,10 +97,13 @@ const updateTotals = (entries) => {
     const now = new Date();
     const currentMonth = now.toISOString().slice(0, 7);
 
-    const monthTotal = entries
+    // Only count approved hours
+    const approvedEntries = entries.filter((entry) => entry.approved === true);
+    
+    const monthTotal = approvedEntries
         .filter((entry) => entry.date.startsWith(currentMonth))
         .reduce((sum, entry) => sum + entry.duration, 0);
-    const allTotal = entries.reduce((sum, entry) => sum + entry.duration, 0);
+    const allTotal = approvedEntries.reduce((sum, entry) => sum + entry.duration, 0);
 
     monthTotalEl.textContent = monthTotal.toFixed(1);
     allTotalEl.textContent = allTotal.toFixed(1);
@@ -150,6 +159,12 @@ const renderAdminEntries = () => {
 
     adminEntriesBody.innerHTML = "";
     filtered.forEach((entry) => {
+        const isApproved = entry.approved === true;
+        const approvalButtons = isApproved 
+            ? '<span style="color: #28a745; font-weight: 600;">✓ Approved</span>'
+            : `<button class="cta-button" style="padding: 0.25rem 0.75rem; font-size: 0.875rem; margin-right: 0.5rem;" data-approve="${entry.id}">Approve</button>
+               <button class="link-button" data-reject="${entry.id}" style="color: #dc3545;">Reject</button>`;
+        
         const row = document.createElement("tr");
         row.innerHTML = `
             <td>${entry.date}</td>
@@ -157,13 +172,37 @@ const renderAdminEntries = () => {
             <td><span class="pill">${entry.category}</span></td>
             <td>${entry.duration.toFixed(1)}</td>
             <td>${entry.notes || ""}</td>
+            <td>${approvalButtons}</td>
             <td><button class="link-button" data-id="${entry.id}">Delete</button></td>
         `;
         adminEntriesBody.appendChild(row);
     });
 
+    // Approve button handlers
+    adminEntriesBody.querySelectorAll("button[data-approve]").forEach((button) => {
+        button.addEventListener("click", async () => {
+            const entryId = button.getAttribute("data-approve");
+            await updateDoc(doc(db, "hours", entryId), { approved: true });
+            showMessage("Hours approved!");
+            await loadAdminData();
+        });
+    });
+
+    // Reject button handlers
+    adminEntriesBody.querySelectorAll("button[data-reject]").forEach((button) => {
+        button.addEventListener("click", async () => {
+            if (!confirm("Reject these hours? This will delete the entry.")) return;
+            const entryId = button.getAttribute("data-reject");
+            await deleteDoc(doc(db, "hours", entryId));
+            showMessage("Hours rejected and removed.");
+            await loadAdminData();
+        });
+    });
+
+    // Delete button handlers
     adminEntriesBody.querySelectorAll("button[data-id]").forEach((button) => {
         button.addEventListener("click", async () => {
+            if (!confirm("Delete this entry?")) return;
             const entryId = button.getAttribute("data-id");
             await deleteDoc(doc(db, "hours", entryId));
             await loadAdminData();
@@ -272,6 +311,9 @@ const loadAdminData = async () => {
     const totalsMap = {};
 
     adminEntries.forEach((entry) => {
+        // Only count approved hours in totals
+        if (entry.approved !== true) return;
+        
         if (!totalsMap[entry.uid]) {
             totalsMap[entry.uid] = {
                 name: entry.memberName,
@@ -307,14 +349,18 @@ form?.addEventListener("submit", async (event) => {
     }
 
     try {
+        const currentUser = auth.currentUser;
+        const userIsAdmin = isAdmin(currentUser);
+        
         await addDoc(collection(db, "hours"), {
-            uid: auth.currentUser.uid,
+            uid: currentUser.uid,
             date,
             start,
             end,
             category,
             notes,
             duration,
+            approved: userIsAdmin, // Auto-approve if admin logs hours
             createdAt: serverTimestamp()
         });
 
