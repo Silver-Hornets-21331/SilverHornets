@@ -1,10 +1,5 @@
 // sponsors.js - Dynamic sponsor display
-let sponsorData = {
-    platinum: [],
-    gold: [],
-    silver: [],
-    bronze: []
-};
+let sponsorData = [];
 
 // Load sponsor data from JSON
 async function loadSponsors() {
@@ -53,30 +48,24 @@ function createSponsorCard(sponsor) {
     return card;
 }
 
-// Display sponsors organized by tier
+// Display all sponsors together
 function displaySponsors() {
-    const tiers = ['platinum', 'gold', 'silver', 'bronze'];
+    const container = document.getElementById('all-sponsors');
+    if (!container) return;
     
-    tiers.forEach(tier => {
-        const container = document.getElementById(`${tier}-sponsors`);
-        if (!container) return;
-        
-        container.innerHTML = '';
-        
-        const sponsors = sponsorData[tier] || [];
-        
-        if (sponsors.length === 0) {
-            const placeholder = document.createElement('p');
-            placeholder.className = 'sponsor-placeholder';
-            placeholder.textContent = `Become our first ${tier.charAt(0).toUpperCase() + tier.slice(1)} sponsor!`;
-            container.appendChild(placeholder);
-        } else {
-            sponsors.forEach(sponsor => {
-                const card = createSponsorCard(sponsor);
-                container.appendChild(card);
-            });
-        }
-    });
+    container.innerHTML = '';
+    
+    if (sponsorData.length === 0) {
+        const placeholder = document.createElement('p');
+        placeholder.className = 'sponsor-placeholder';
+        placeholder.textContent = 'Become our first sponsor! Contact us to support Silver Hornets.';
+        container.appendChild(placeholder);
+    } else {
+        sponsorData.forEach(sponsor => {
+            const card = createSponsorCard(sponsor);
+            container.appendChild(card);
+        });
+    }
 }
 
 // Initialize when DOM is ready

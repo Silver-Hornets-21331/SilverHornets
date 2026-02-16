@@ -8,16 +8,11 @@ Create the following directory to store sponsor logos:
 ```
 images/
   └── sponsors/
-      ├── platinum-sponsor-1.png
-      ├── gold-sponsor-1.png
-      ├── gold-sponsor-2.png
-      ├── silver-sponsor-1.png
-      ├── silver-sponsor-2.png
-      ├── silver-sponsor-3.png
-      ├── bronze-sponsor-1.png
-      ├── bronze-sponsor-2.png
-      ├── bronze-sponsor-3.png
-      └── bronze-sponsor-4.png
+      ├── sponsor-1.png
+      ├── sponsor-2.png
+      ├── sponsor-3.png
+      ├── sponsor-4.png
+      └── ... (add more as needed)
 ```
 
 ## Adding a New Sponsor
@@ -29,19 +24,23 @@ images/
    - Example: `images/sponsors/acme-corp.png`
 
 ### Step 2: Update sponsors.json
-Open `js/sponsors.json` and add the sponsor to the appropriate tier:
+Open `js/sponsors.json` and add the sponsor to the array:
 
 ```json
-{
-  "platinum": [
-    {
-      "name": "ACME Corporation",
-      "logo": "images/sponsors/acme-corp.png",
-      "website": "https://www.acmecorp.com",
-      "description": "Leading technology solutions"
-    }
-  ]
-}
+[
+  {
+    "name": "ACME Corporation",
+    "logo": "images/sponsors/acme-corp.png",
+    "website": "https://www.acmecorp.com",
+    "description": "Leading technology solutions"
+  },
+  {
+    "name": "Another Company",
+    "logo": "images/sponsors/another-company.png",
+    "website": "https://www.anothercompany.com",
+    "description": "Supporting STEM education"
+  }
+]
 ```
 
 **Fields:**
@@ -58,21 +57,25 @@ Open `js/sponsors.json` and add the sponsor to the appropriate tier:
 
 ## Sponsorship Tiers
 
+The sponsors page displays sponsorship tier information for potential sponsors, but **all sponsor logos are displayed together** without classification by tier.
+
 ### Platinum ($5,000+)
-- Largest logo display
-- Top position on sponsors page
+- Logo on website and team materials
+- Recognition at competitions
+- Team merchandise
+- Event invitations
 
 ### Gold ($2,500 - $4,999)
-- Prominent logo display
-- Second tier position
+- Logo on website
+- Team merchandise
+- Social media recognition
 
 ### Silver ($1,000 - $2,499)
-- Medium logo display
-- Third tier position
+- Website acknowledgment
+- Social media mention
 
 ### Bronze ($500 - $999)
-- Standard logo display
-- Fourth tier position
+- Website recognition
 
 ## Logo Guidelines
 
@@ -98,7 +101,7 @@ Open `js/sponsors.json` and add the sponsor to the appropriate tier:
 
 To remove a sponsor:
 1. Open `js/sponsors.json`
-2. Delete the sponsor's object from the appropriate tier
+2. Delete the sponsor's object from the array
 3. Optionally delete the logo image file
 4. Save and commit changes
 
@@ -120,40 +123,38 @@ To remove a sponsor:
 ## Example sponsors.json
 
 ```json
-{
-  "platinum": [
-    {
-      "name": "Tech Giant Inc",
-      "logo": "images/sponsors/tech-giant.png",
-      "website": "https://techgiant.com",
-      "description": "Leading innovation partner"
-    }
-  ],
-  "gold": [
-    {
-      "name": "Innovation Co",
-      "logo": "images/sponsors/innovation-co.png",
-      "website": "https://innovationco.com",
-      "description": "Supporting STEM education"
-    }
-  ],
-  "silver": [
-    {
-      "name": "Local Business",
-      "logo": "images/sponsors/local-biz.png",
-      "website": "https://localbiz.com",
-      "description": "Community supporter"
-    }
-  ],
-  "bronze": [
-    {
-      "name": "Community Partner",
-      "logo": "images/sponsors/community.png",
-      "website": "https://community.org",
-      "description": "Building the future"
-    }
-  ]
-}
+[
+  {
+    "name": "Tech Giant Inc",
+    "logo": "images/sponsors/tech-giant.png",
+    "website": "https://techgiant.com",
+    "description": "Leading innovation partner"
+  },
+  {
+    "name": "Innovation Co",
+    "logo": "images/sponsors/innovation-co.png",
+    "website": "https://innovationco.com",
+    "description": "Supporting STEM education"
+  },
+  {
+    "name": "Local Business",
+    "logo": "images/sponsors/local-biz.png",
+    "website": "https://localbiz.com",
+    "description": "Community supporter"
+  },
+  {
+    "name": "Engineering Solutions",
+    "logo": "images/sponsors/engineering.png",
+    "website": "https://engineering.com",
+    "description": "Engineering excellence"
+  },
+  {
+    "name": "Community Partner",
+    "logo": "images/sponsors/community.png",
+    "website": "https://community.org",
+    "description": "Building the future"
+  }
+]
 ```
 
 ## Need Help?

@@ -54,7 +54,7 @@ body {
 .nav-menu {
     display: flex;
     list-style: none;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
 .nav-menu a {
@@ -103,7 +103,7 @@ body {
 
 .tagline {
     font-size: 1.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     font-style: italic;
 }
 
@@ -168,13 +168,13 @@ body {
 .page-header {
     background: linear-gradient(135deg, #023e8a 0%, #0077b6 100%);
     color: white;
-    padding: 60px 20px;
+    padding: 30px 20px;
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .page-header h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
 }
 
 .page-subtitle {
@@ -184,7 +184,7 @@ body {
 }
 
 .hero-actions {
-    margin-top: 1.5rem;
+    margin-top: 1.25rem;
     display: flex;
     gap: 1rem;
     justify-content: center;
@@ -194,37 +194,37 @@ body {
 /* Sections */
 .section {
     background: white;
-    padding: 60px 20px;
-    margin-bottom: 2rem;
+    padding: 30px 20px;
+    margin-bottom: 1rem;
 }
 
 .section h2 {
     color: #023e8a;
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
     border-bottom: 3px solid #ffb703;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.4rem;
     display: inline-block;
 }
 
 .section h3 {
     color: #0077b6;
-    margin-top: 1.5rem;
-    margin-bottom: 1rem;
+    margin-top: 0.75rem;
+    margin-bottom: 0.5rem;
 }
 
 .section p {
-    margin-bottom: 1rem;
-    line-height: 1.8;
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
 }
 
 .section ul {
-    margin-left: 2rem;
-    margin-bottom: 1rem;
+    margin-left: 1.25rem;
+    margin-bottom: 0.5rem;
 }
 
 .section li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.35rem;
 }
 
 .muted {
@@ -254,13 +254,13 @@ body {
 .highlights-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
+    gap: 1rem;
+    margin-top: 1rem;
 }
 
 .highlight-card {
     background: linear-gradient(135deg, #f0f3ff 0%, #e0e7ff 100%);
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 10px;
     text-align: center;
     border-left: 5px solid #ffb703;
@@ -272,8 +272,8 @@ body {
 }
 
 .highlight-card .icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
 }
 
 .highlight-card h3 {
@@ -285,9 +285,9 @@ body {
 .hours-card {
     background: white;
     border-radius: 16px;
-    padding: 2.5rem;
+    padding: 2rem;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .stacked-form h3 {
@@ -298,7 +298,7 @@ body {
 .divider {
     height: 1px;
     background: #e0e7ff;
-    margin: 2rem 0;
+    margin: 1rem 0;
 }
 
 .form-row {
@@ -312,14 +312,14 @@ body {
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .hours-grid {
     display: grid;
     grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
-    gap: 2rem;
-    margin-bottom: 2rem;
+    gap: 1rem;
+    margin-bottom: 1rem;
 }
 
 .totals {
@@ -329,7 +329,7 @@ body {
 
 .total-card {
     background: #f0f3ff;
-    padding: 1.5rem;
+    padding: 1.25rem;
     border-radius: 12px;
     text-align: center;
 }
@@ -340,43 +340,43 @@ body {
 }
 
 .total-number {
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 700;
     color: #023e8a;
 }
 
 .hours-table {
     background: white;
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 16px;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
 }
 
 .admin-panel {
-    margin-top: 2rem;
+    margin-top: 1rem;
     background: #f8f9ff;
     border-radius: 16px;
-    padding: 2rem;
+    padding: 1rem;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
 }
 
 .admin-grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-    gap: 2rem;
-    margin-top: 1.5rem;
+    gap: 1rem;
+    margin-top: 1.25rem;
 }
 
 .admin-card {
     background: white;
     border-radius: 12px;
-    padding: 1.5rem;
+    padding: 1.25rem;
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
 }
 
 .admin-card h4 {
     color: #023e8a;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
 }
 
 .admin-actions {
@@ -426,20 +426,20 @@ th {
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
+    gap: 1rem;
+    margin-top: 1rem;
 }
 
 .impact-card {
     background: linear-gradient(135deg, #f0f3ff 0%, #e0e7ff 100%);
     border-radius: 12px;
-    padding: 2rem;
+    padding: 1rem;
     text-align: center;
     border: 2px solid rgba(0, 150, 199, 0.2);
 }
 
 .impact-number {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: #023e8a;
     margin-bottom: 0.5rem;
@@ -453,7 +453,7 @@ th {
 .outreach-card {
     background: white;
     border-radius: 12px;
-    padding: 2rem;
+    padding: 1rem;
     border-left: 5px solid #ffb703;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
@@ -465,14 +465,14 @@ th {
 .event-list {
     display: grid;
     gap: 1.25rem;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
 }
 
 .event-item {
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 1rem;
-    padding: 1.5rem;
+    padding: 1.25rem;
     background: #f9fbff;
     border-radius: 12px;
     border: 1px solid #e0e7ff;
@@ -526,7 +526,7 @@ th {
 .gallery-item {
     background: #e0e7ff;
     border-radius: 12px;
-    padding: 2.5rem 1.5rem;
+    padding: 2rem 1.25rem;
     text-align: center;
     color: #023e8a;
     font-weight: 600;
@@ -536,7 +536,7 @@ th {
     background: linear-gradient(135deg, #023e8a 0%, #0077b6 100%);
     color: white;
     border-radius: 16px;
-    padding: 2.5rem;
+    padding: 2rem;
     text-align: center;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
@@ -549,25 +549,25 @@ th {
 }
 
 .cta-banner p {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 /* Stats Section */
 .stats {
     background: linear-gradient(135deg, #023e8a 0%, #0077b6 100%);
     color: white;
-    padding: 60px 20px;
+    padding: 30px 20px;
 }
 
 .stats .container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    gap: 1rem;
 }
 
 .stat-card {
     background: rgba(255, 255, 255, 0.1);
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 10px;
     text-align: center;
     border: 2px solid rgba(255, 183, 3, 0.5);
@@ -691,51 +691,51 @@ th {
 .values-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
+    gap: 1rem;
+    margin-top: 1rem;
 }
 
 .value-card {
     background: #f0f3ff;
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 10px;
     border-top: 4px solid #ffb703;
 }
 
 .value-card h3 {
     color: #023e8a;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
 }
 
 /* Team Grid */
 .team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
+    gap: 1rem;
+    margin-top: 1rem;
 }
 
 .team-member {
     background: #f0f3ff;
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 10px;
     text-align: center;
     border: 2px solid #0096c7;
 }
 
 .member-placeholder {
-    font-size: 4rem;
-    margin-bottom: 1rem;
+    font-size: 3.5rem;
+    margin-bottom: 0.75rem;
 }
 
 .member-avatar {
-    width: 96px;
-    height: 96px;
+    width: 88px;
+    height: 88px;
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid #023e8a;
     background: #e0e7ff;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
 }
 
 .team-member h3 {
@@ -746,27 +746,27 @@ th {
 /* Member List */
 .member-list {
     background: #f9f9f9;
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 10px;
-    margin: 1.5rem 0;
+    margin: 1rem 0;
 }
 
 .member-list li {
-    margin-bottom: 0.75rem;
-    margin-left: 2rem;
+    margin-bottom: 0.5rem;
+    margin-left: 1.25rem;
 }
 
 /* Sponsor Tiers */
 .sponsor-tiers {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
+    gap: 1rem;
+    margin-top: 1rem;
 }
 
 .sponsor-card {
     background: linear-gradient(135deg, #fff8f0 0%, #ffe8d6 100%);
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 10px;
     border-left: 5px solid #ffb703;
 }
@@ -802,19 +802,27 @@ th {
     font-weight: bold;
 }
 
+/* Sponsors page intro grid */
+.sponsors-intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
 /* Sponsor Logos Display */
 .sponsor-logos-section {
-    margin: 3rem 0;
+    margin: 1.5rem 0;
 }
 
 .sponsor-tier {
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
 }
 
 .tier-title {
     color: #023e8a;
     font-size: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     text-align: center;
     border-bottom: 2px solid #ffb703;
     padding-bottom: 0.5rem;
@@ -822,15 +830,15 @@ th {
 
 .sponsor-logos {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-    margin-top: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
     align-items: center;
 }
 
 .sponsor-logo-card {
     background: white;
-    padding: 1.5rem;
+    padding: 1.25rem;
     border-radius: 10px;
     border: 2px solid #e0e7ff;
     text-align: center;
@@ -839,7 +847,7 @@ th {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 150px;
+    min-height: 120px;
 }
 
 .sponsor-logo-card:hover {
@@ -856,10 +864,10 @@ th {
 
 .sponsor-logo {
     max-width: 100%;
-    max-height: 120px;
+    max-height: 100px;
     height: auto;
     object-fit: contain;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
 }
 
 .sponsor-name {
@@ -873,7 +881,7 @@ th {
     color: #023e8a;
     font-weight: 700;
     font-size: 1.1rem;
-    padding: 2rem 1rem;
+    padding: 1rem;
     text-align: center;
 }
 
@@ -881,7 +889,7 @@ th {
     text-align: center;
     color: #6c757d;
     font-style: italic;
-    padding: 2rem;
+    padding: 1rem;
     background: #f8f9fa;
     border-radius: 8px;
     border: 2px dashed #dee2e6;
@@ -890,10 +898,10 @@ th {
 /* CTA Section */
 .cta-section {
     background: linear-gradient(135deg, #f0f3ff 0%, #e0e7ff 100%);
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 10px;
     text-align: center;
-    margin-top: 2rem;
+    margin-top: 1rem;
     border: 2px solid #0096c7;
 }
 
@@ -906,12 +914,12 @@ th {
 .contact-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    gap: 2rem;
 }
 
 .contact-info {
     background: #f0f3ff;
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 10px;
 }
 
@@ -924,9 +932,9 @@ th {
 
 .info-card {
     background: white;
-    padding: 1.5rem;
+    padding: 1rem;
     border-radius: 8px;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     border-left: 4px solid #ffb703;
 }
 
@@ -947,7 +955,7 @@ th {
 /* Contact Form */
 .contact-form {
     background: white;
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
@@ -960,7 +968,7 @@ th {
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .form-group label {
@@ -1040,8 +1048,8 @@ input[type="email"]:not([aria-invalid]) {
     background: #023e8a;
     color: white;
     text-align: center;
-    padding: 2rem 20px;
-    margin-top: 2rem;
+    padding: 1rem 20px;
+    margin-top: 1rem;
 }
 
 .footer p {
@@ -1244,6 +1252,7 @@ input[type="email"]:not([aria-invalid]) {
     .values-grid,
     .team-grid,
     .sponsor-tiers,
+    .sponsors-intro-grid,
     .impact-grid,
     .outreach-grid,
     .partner-grid,
@@ -1289,7 +1298,7 @@ input[type="email"]:not([aria-invalid]) {
     }
 
     .page-header {
-        padding: 40px 20px;
+        padding: 20px 15px;
     }
 
     .page-header h1 {
@@ -1297,7 +1306,7 @@ input[type="email"]:not([aria-invalid]) {
     }
 
     .section {
-        padding: 30px 20px;
+        padding: 20px 15px;
     }
 
     .tagline {
