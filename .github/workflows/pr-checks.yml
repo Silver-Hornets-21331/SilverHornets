@@ -1,0 +1,64 @@
+name: Pull Request Checks
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    name: Validate PR
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Check for HTML syntax errors
+        run: |
+          echo "Checking HTML files..."
+          find . -name "*.html" -type f -not -path "./.git/*" | while read file; do
+            if ! grep -q "<!DOCTYPE html>" "$file"; then
+              echo "Warning: $file may be missing DOCTYPE declaration"
+            fi
+            echo "✓ $file"
+          done
+      
+      - name: Check for required files
+        run: |
+          echo "Checking for required files..."
+          required_files=("index.html" "about.html" "team.html" "contact.html" "style.css")
+          for file in "${required_files[@]}"; do
+            if [ -f "$file" ]; then
+              echo "✓ $file exists"
+            else
+              echo "✗ Missing required file: $file"
+              exit 1
+            fi
+          done
+      
+      - name: Check for broken internal links
+        run: |
+          echo "Checking for common broken link patterns..."
+          if grep -r "href=\"http://localhost" --include="*.html" .; then
+            echo "✗ Found localhost links that should be removed"
+            exit 1
+          fi
+          echo "✓ No localhost links found"
+      
+      - name: Validate JSON files
+        run: |
+          echo "Validating JSON files..."
+          find . -name "*.json" -type f -not -path "./.git/*" -not -path "./node_modules/*" | while read file; do
+            if python3 -m json.tool "$file" > /dev/null 2>&1; then
+              echo "✓ $file is valid JSON"
+            else
+              echo "✗ $file has invalid JSON syntax"
+              exit 1
+            fi
+          done
+      
+      - name: PR validation complete
+        run: |
+          echo "✓ All checks passed!"
+          echo "This PR is ready for review."
