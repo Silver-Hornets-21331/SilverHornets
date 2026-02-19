@@ -122,20 +122,38 @@ registerForm?.addEventListener("submit", async (event) => {
     }
 
     try {
+        console.log("Creating user account...");
         const credential = await createUserWithEmailAndPassword(auth, email, password);
+        
+        console.log("✅ User created, UID:", credential.user.uid);
+        console.log("Updating profile...");
         await updateProfile(credential.user, { displayName: name });
+        
+        console.log("Creating member profile in Firestore...");
         await setDoc(doc(db, "members", credential.user.uid), {
             name,
             email,
             inviteCode: inviteCode.toUpperCase(),
             createdAt: new Date().toISOString()
         });
+        
+        console.log("✅ Registration complete!");
         showMessage("Account created! Redirecting...");
         setTimeout(() => {
             window.location.href = "hours.html";
         }, 1500);
     } catch (error) {
-        showMessage(error.message, true);
+        console.error("❌ Registration error:", error);
+        console.error("Error code:", error.code);
+        console.error("Error message:", error.message);
+        
+        if (error.code === 'permission-denied') {
+            showMessage("Database error. Please check that Firestore is set up correctly.", true);
+        } else if (error.code === 'auth/email-already-in-use') {
+            showMessage("This User ID is already registered. Please sign in instead.", true);
+        } else {
+            showMessage(error.message, true);
+        }
     } finally {
         setLoadingState(false, submitBtn);
     }

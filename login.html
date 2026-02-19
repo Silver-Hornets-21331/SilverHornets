@@ -31,13 +31,6 @@
 
     <section class="section">
         <div class="container">
-            <div class="notice warning" style="margin-bottom: 2rem; padding: 2rem; background: #fff3cd; border: 2px solid #ffc107; border-radius: 8px; color: #856404; text-align: center;">
-                <h2 style="margin: 0 0 1rem 0; color: #856404;">🚧 Feature Temporarily Unavailable</h2>
-                <p style="margin: 0; font-size: 1.1rem;">The member login and hours tracking system is currently offline.</p>
-                <p style="margin: 1rem 0 0 0; font-size: 0.95rem;">Please contact your team coach for alternative methods to log your hours.</p>
-                <p style="margin: 1rem 0 0 0; font-size: 0.875rem; opacity: 0.8;">This feature will return once database services are restored.</p>
-            </div>
-            <!-- Forms disabled - uncomment when database is restored
             <div class="auth-card">
                 <h2>Welcome back</h2>
                 <p class="muted">Sign in to log your hours. New members can create an account.</p>
@@ -87,7 +80,6 @@
 
                 <div id="auth-message" class="notice" aria-live="polite"></div>
             </div>
-            -->
         </div>
     </section>
 
@@ -121,9 +113,8 @@
     </footer>
 
     <script src="js/chatbot.js" defer></script>
-    <!-- Firebase functionality temporarily disabled -->
-    <!-- <script type="module" src="js/firebase-config.js"></script> -->
-    <!-- <script type="module" src="js/auth.js"></script> -->
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/auth.js"></script>
     <script>
         // Password visibility toggle
         document.addEventListener('DOMContentLoaded', () => {

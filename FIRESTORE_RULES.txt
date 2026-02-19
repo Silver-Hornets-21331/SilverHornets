@@ -1,0 +1,60 @@
+// ========================================
+// FIRESTORE SECURITY RULES
+// ========================================
+// Copy these rules to your Firebase Console
+// 
+// 1. Go to: https://console.firebase.google.com
+// 2. Select your project: ftc213312026db
+// 3. Click "Firestore Database" in left menu
+// 4. Click "Rules" tab
+// 5. Replace ALL existing rules with the code below
+// 6. Click "Publish"
+// ========================================
+
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Members collection
+    match /members/{userId} {
+      // Users can read/write their own data
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      // Admins can read and write all member data
+      allow read, write: if request.auth != null && 
+                            request.auth.token.email == 'ftc21331@gmail.com';
+    }
+    
+    // Hours collection - authenticated users can read/write their own entries
+    match /hours/{entryId} {
+      // Users can create their own entries
+      allow create: if request.auth != null && 
+                       request.resource.data.uid == request.auth.uid;
+      
+      // Users can read, update, delete their own entries
+      allow read, update, delete: if request.auth != null && 
+                                     resource.data.uid == request.auth.uid;
+      
+      // Admins can read/update/delete all entries (for approval)
+      allow read, write: if request.auth != null && 
+                            request.auth.token.email == 'ftc21331@gmail.com';
+    }
+    
+    // Deny all other access
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+
+// ========================================
+// AUTHENTICATION SETUP REQUIRED
+// ========================================
+// You also need to enable Email/Password authentication:
+//
+// 1. In Firebase Console, go to "Authentication"
+// 2. Click "Get Started" (if not already enabled)
+// 3. Go to "Sign-in method" tab
+// 4. Click "Email/Password"
+// 5. Enable it and Save
+// ========================================

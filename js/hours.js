@@ -31,7 +31,7 @@ const adminFilter = document.getElementById("admin-member-filter");
 const adminExportButton = document.getElementById("admin-export");
 
 const ADMIN_EMAILS = [
-    "ftc.team.boulan@gmail.com"
+    "ftc21331@gmail.com"
 ];
 
 let adminEntries = [];
@@ -271,14 +271,25 @@ const exportAdminCsv = () => {
 };
 
 const loadAdminData = async () => {
+    console.log("Loading admin data...");
+    
+    // First, get all users from Firebase Authentication to use as fallback
+    const authUsers = {};
+    authUsers[auth.currentUser.uid] = {
+        name: auth.currentUser.displayName,
+        email: auth.currentUser.email
+    };
+    
     const membersSnap = await getDocs(collection(db, "members"));
     membersById = {};
     const memberOptions = [
         { id: "all", label: "All members" }
     ];
 
+    console.log("Found", membersSnap.size, "members in Firestore");
     membersSnap.forEach((docSnap) => {
         const data = docSnap.data();
+        console.log("Member doc ID:", docSnap.id, "Name:", data.name, "Email:", data.email);
         membersById[docSnap.id] = data;
         memberOptions.push({
             id: docSnap.id,
@@ -297,13 +308,16 @@ const loadAdminData = async () => {
     }
 
     const hoursSnap = await getDocs(query(collection(db, "hours"), orderBy("date", "desc")));
+    console.log("Found", hoursSnap.size, "hour entries");
     adminEntries = hoursSnap.docs.map((docSnap) => {
         const data = docSnap.data();
-        const member = membersById[data.uid] || {};
+        const member = membersById[data.uid] || authUsers[data.uid] || {};
+        const memberName = member.name || member.email || "Unknown";
+        console.log("Entry UID:", data.uid, "→ Member name:", memberName, "| From Firestore member:", !!membersById[data.uid]);
         return {
             id: docSnap.id,
             ...data,
-            memberName: member.name || member.email || "Unknown"
+            memberName: memberName
         };
     });
 
@@ -334,6 +348,7 @@ const loadAdminData = async () => {
 
 form?.addEventListener("submit", async (event) => {
     event.preventDefault();
+    console.log("🔵 Form submitted!");
     showMessage("");
 
     const date = document.getElementById("log-date").value;
@@ -343,8 +358,17 @@ form?.addEventListener("submit", async (event) => {
     const notes = document.getElementById("log-notes").value.trim();
     const duration = parseDuration(start, end);
 
+    console.log("Form values:", { date, start, end, category, notes, duration });
+
     if (duration <= 0) {
+        console.log("❌ Invalid duration");
         showMessage("End time must be after start time.", true);
+        return;
+    }
+
+    if (!auth.currentUser) {
+        console.log("❌ No user logged in!");
+        showMessage("You must be logged in to add hours.", true);
         return;
     }
 
@@ -352,7 +376,11 @@ form?.addEventListener("submit", async (event) => {
         const currentUser = auth.currentUser;
         const userIsAdmin = isAdmin(currentUser);
         
-        await addDoc(collection(db, "hours"), {
+        console.log("✅ User authenticated:", currentUser.email);
+        console.log("Adding hours entry for user:", currentUser.uid);
+        console.log("Is admin:", userIsAdmin);
+        
+        const docData = {
             uid: currentUser.uid,
             date,
             start,
@@ -362,16 +390,35 @@ form?.addEventListener("submit", async (event) => {
             duration,
             approved: userIsAdmin, // Auto-approve if admin logs hours
             createdAt: serverTimestamp()
-        });
-
+        };
+        
+        console.log("Document to save:", docData);
+        
+        const docRef = await addDoc(collection(db, "hours"), docData);
+        
+        console.log("✅ Entry saved successfully! Document ID:", docRef.id);
         form.reset();
         updateDurationPreview();
         showMessage("Entry saved!");
         await loadEntries(auth.currentUser.uid);
     } catch (error) {
-        showMessage(error.message, true);
+        console.error("❌ ERROR SAVING ENTRY:");
+        console.error("Error code:", error.code);
+        console.error("Error message:", error.message);
+        console.error("Full error:", error);
+        
+        if (error.code === 'permission-denied') {
+            showMessage("Permission denied. Check: 1) You're logged in, 2) Firestore rules are published, 3) Member profile exists", true);
+        } else if (error.code === 'failed-precondition') {
+            showMessage("Index required. Click the link in the console to create it.", true);
+        } else {
+            showMessage(`Error: ${error.message}`, true);
+        }
     }
 });
+
+console.log("✅ Hours form event listener attached");
+console.log("Form element:", form);
 
 logoutButton?.addEventListener("click", async () => {
     await signOut(auth);
@@ -388,6 +435,12 @@ onAuthStateChanged(auth, async (user) => {
         window.location.href = "login.html";
         return;
     }
+
+    console.log("=== CURRENT USER INFO ===");
+    console.log("UID:", user.uid);
+    console.log("Email:", user.email);
+    console.log("Display Name:", user.displayName);
+    console.log("========================");
 
     nameEl.textContent = user.displayName ? `${user.displayName}'s Hours` : "Member Hours";
     updateDurationPreview();
