@@ -230,15 +230,17 @@ body {
 
 .muted {
     color: #6c757d;
+    font-size: 0.9rem;
 }
 
 .notice {
-    margin-bottom: 1rem;
-    padding: 0.75rem 1rem;
+    margin-bottom: 0.75rem;
+    padding: 0.6rem 0.85rem;
     border-radius: 8px;
     background: #f0f3ff;
     color: #023e8a;
     font-weight: 600;
+    font-size: 0.9rem;
     display: none;
     border-left: 4px solid #0066cc;
     animation: slideIn 0.3s ease-out;
@@ -305,108 +307,118 @@ body {
 .auth-card,
 .hours-card {
     background: white;
-    border-radius: 16px;
-    padding: 1.5rem;
+    border-radius: 12px;
+    padding: 1rem;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
 }
 
 .stacked-form h3 {
     color: #023e8a;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.hours-card h3,
+.auth-card h3 {
+    color: #023e8a;
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0;
 }
 
 .divider {
     height: 1px;
     background: #e0e7ff;
-    margin: 0.75rem 0;
+    margin: 0.5rem 0;
 }
 
 .form-row {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 0.75rem;
+    gap: 0.5rem;
 }
 
 .hours-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .hours-grid {
     display: grid;
     grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .totals {
     display: grid;
-    gap: 0.75rem;
+    gap: 0.5rem;
 }
 
 .total-card {
     background: #f0f3ff;
-    padding: 1rem;
-    border-radius: 12px;
+    padding: 0.75rem;
+    border-radius: 10px;
     text-align: center;
 }
 
 .total-label {
     color: #0077b6;
     font-weight: 600;
+    font-size: 0.9rem;
 }
 
 .total-number {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: #023e8a;
 }
 
 .hours-table {
     background: white;
-    padding: 0.75rem;
-    border-radius: 16px;
+    padding: 0.5rem;
+    border-radius: 12px;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
 }
 
 .admin-panel {
-    margin-top: 0.75rem;
+    margin-top: 0.5rem;
     background: #f8f9ff;
-    border-radius: 16px;
-    padding: 1rem;
+    border-radius: 12px;
+    padding: 0.75rem;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
 }
 
 .admin-grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-    gap: 0.75rem;
-    margin-top: 1rem;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
 }
 
 .admin-card {
     background: white;
-    border-radius: 12px;
-    padding: 1rem;
+    border-radius: 10px;
+    padding: 0.75rem;
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
 }
 
 .admin-card h4 {
     color: #023e8a;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
+    font-size: 1.1rem;
 }
 
 .admin-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: 0.5rem;
     align-items: flex-end;
     justify-content: space-between;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
 }
 
 .admin-actions .form-group {
@@ -421,7 +433,8 @@ body {
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 0.75rem;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
 }
 
 thead {
@@ -430,7 +443,7 @@ thead {
 
 th,
 td {
-    padding: 0.6rem 0.75rem;
+    padding: 0.5rem 0.6rem;
     text-align: left;
     border-bottom: 1px solid #e0e7ff;
     vertical-align: top;
@@ -506,8 +519,9 @@ th {
     background: #ffb703;
     color: #023e8a;
     font-weight: 700;
-    padding: 0.4rem 0.75rem;
+    padding: 0.3rem 0.6rem;
     border-radius: 999px;
+    font-size: 0.85rem;
     height: fit-content;
 }
 
@@ -517,9 +531,9 @@ th {
     align-items: center;
     justify-content: center;
     font-weight: 600;
-    padding: 0.4rem 0.75rem;
+    padding: 0.3rem 0.6rem;
     border-radius: 999px;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
 }
 
 .status-badge.approved {
@@ -989,25 +1003,26 @@ th {
 }
 
 .form-group {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.25rem;
     color: #023e8a;
     font-weight: 500;
+    font-size: 0.9rem;
 }
 
 .form-group input,
 .form-group textarea,
 .form-group select {
     width: 100%;
-    padding: 0.6rem;
+    padding: 0.5rem;
     border: 2px solid #e0e0e0;
     border-radius: 5px;
     font-family: inherit;
-    font-size: 1rem;
+    font-size: 0.95rem;
     transition: border-color 0.3s ease;
 }
 
