@@ -14,13 +14,13 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 15px;
 }
 
 /* Navigation */
 .navbar {
     background: linear-gradient(135deg, #ffb703 0%, #fb8500 100%);
-    padding: 1rem 0;
+    padding: 0.4rem 0;
     position: sticky;
     top: 0;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -37,30 +37,31 @@ body {
 }
 
 .logo {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: bold;
     color: white;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.3rem;
 }
 
 .logo-image {
-    width: 110px;
-    height: 110px;
+    width: 75px;
+    height: 75px;
     display: block;
 }
 
 .nav-menu {
     display: flex;
     list-style: none;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 .nav-menu a {
     color: white;
     text-decoration: none;
     font-weight: 500;
+    font-size: 0.95rem;
     transition: opacity 0.3s ease;
 }
 
@@ -74,9 +75,9 @@ body {
 .hero {
     background: linear-gradient(135deg, #023e8a 0%, #0077b6 50%, #0096c7 100%);
     color: white;
-    padding: 120px 20px;
+    padding: 30px 20px;
     text-align: center;
-    min-height: 500px;
+    min-height: 220px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -85,25 +86,25 @@ body {
 .home-hero {
     background-image: linear-gradient(135deg, rgba(2, 62, 138, 0.92) 0%, rgba(0, 119, 182, 0.92) 50%, rgba(0, 150, 199, 0.92) 100%),
         url('images/2025-04-28%20-%20SIlver%20Hornets%20Logo.png');
-    background-size: cover, 520px;
+    background-size: cover, 350px;
     background-position: center, center;
     background-repeat: no-repeat;
 }
 
 .hero-content h1 {
-    font-size: 3.5rem;
-    margin-bottom: 0.5rem;
+    font-size: 2.2rem;
+    margin-bottom: 0.3rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hero-content p {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
 }
 
 .tagline {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+    font-size: 1.15rem;
+    margin-bottom: 0.6rem;
     font-style: italic;
 }
 
@@ -112,8 +113,8 @@ body {
     background: #ffb703;
     color: #023e8a;
     border: none;
-    padding: 12px 30px;
-    font-size: 1rem;
+    padding: 8px 20px;
+    font-size: 0.95rem;
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
@@ -168,25 +169,25 @@ body {
 .page-header {
     background: linear-gradient(135deg, #023e8a 0%, #0077b6 100%);
     color: white;
-    padding: 30px 20px;
+    padding: 12px 20px;
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 0.4rem;
 }
 
 .page-header h1 {
-    font-size: 2rem;
+    font-size: 1.6rem;
 }
 
 .page-subtitle {
-    font-size: 1.1rem;
-    margin-top: 0.75rem;
+    font-size: 1rem;
+    margin-top: 0.4rem;
     opacity: 0.9;
 }
 
 .hero-actions {
-    margin-top: 1.25rem;
+    margin-top: 0.75rem;
     display: flex;
-    gap: 1rem;
+    gap: 0.6rem;
     justify-content: center;
     flex-wrap: wrap;
 }
@@ -194,37 +195,37 @@ body {
 /* Sections */
 .section {
     background: white;
-    padding: 30px 20px;
-    margin-bottom: 1rem;
+    padding: 12px 20px;
+    margin-bottom: 0.4rem;
 }
 
 .section h2 {
     color: #023e8a;
-    font-size: 1.5rem;
-    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+    margin-bottom: 0.4rem;
     border-bottom: 3px solid #ffb703;
-    padding-bottom: 0.4rem;
+    padding-bottom: 0.25rem;
     display: inline-block;
 }
 
 .section h3 {
     color: #0077b6;
-    margin-top: 0.75rem;
-    margin-bottom: 0.5rem;
+    margin-top: 0.4rem;
+    margin-bottom: 0.3rem;
 }
 
 .section p {
-    margin-bottom: 0.5rem;
-    line-height: 1.6;
+    margin-bottom: 0.3rem;
+    line-height: 1.4;
 }
 
 .section ul {
     margin-left: 1.25rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
 }
 
 .section li {
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.2rem;
 }
 
 .muted {
@@ -232,35 +233,55 @@ body {
 }
 
 .notice {
-    margin-top: 1rem;
+    margin-bottom: 1rem;
     padding: 0.75rem 1rem;
     border-radius: 8px;
     background: #f0f3ff;
     color: #023e8a;
     font-weight: 600;
     display: none;
+    border-left: 4px solid #0066cc;
+    animation: slideIn 0.3s ease-out;
 }
 
 .notice.error {
     background: #ffe5e5;
     color: #b42318;
+    border-left-color: #dc2626;
+}
+
+.notice.success {
+    background: #d1fae5;
+    color: #065f46;
+    border-left-color: #10b981;
 }
 
 .notice:not(:empty) {
     display: block;
 }
 
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Highlights Grid */
 .highlights-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: 0.6rem;
+    margin-top: 0.6rem;
 }
 
 .highlight-card {
     background: linear-gradient(135deg, #f0f3ff 0%, #e0e7ff 100%);
-    padding: 1rem;
+    padding: 0.6rem;
     border-radius: 10px;
     text-align: center;
     border-left: 5px solid #ffb703;
@@ -272,8 +293,8 @@ body {
 }
 
 .highlight-card .icon {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.75rem;
+    margin-bottom: 0.3rem;
 }
 
 .highlight-card h3 {
@@ -285,51 +306,51 @@ body {
 .hours-card {
     background: white;
     border-radius: 16px;
-    padding: 2rem;
+    padding: 1.5rem;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
 }
 
 .stacked-form h3 {
     color: #023e8a;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
 }
 
 .divider {
     height: 1px;
     background: #e0e7ff;
-    margin: 1rem 0;
+    margin: 0.75rem 0;
 }
 
 .form-row {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1rem;
+    gap: 0.75rem;
 }
 
 .hours-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
 }
 
 .hours-grid {
     display: grid;
     grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
-    gap: 1rem;
-    margin-bottom: 1rem;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
 }
 
 .totals {
     display: grid;
-    gap: 1rem;
+    gap: 0.75rem;
 }
 
 .total-card {
     background: #f0f3ff;
-    padding: 1.25rem;
+    padding: 1rem;
     border-radius: 12px;
     text-align: center;
 }
@@ -347,13 +368,13 @@ body {
 
 .hours-table {
     background: white;
-    padding: 1rem;
+    padding: 0.75rem;
     border-radius: 16px;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
 }
 
 .admin-panel {
-    margin-top: 1rem;
+    margin-top: 0.75rem;
     background: #f8f9ff;
     border-radius: 16px;
     padding: 1rem;
@@ -363,29 +384,29 @@ body {
 .admin-grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-    gap: 1rem;
-    margin-top: 1.25rem;
+    gap: 0.75rem;
+    margin-top: 1rem;
 }
 
 .admin-card {
     background: white;
     border-radius: 12px;
-    padding: 1.25rem;
+    padding: 1rem;
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
 }
 
 .admin-card h4 {
     color: #023e8a;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
 }
 
 .admin-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 0.75rem;
     align-items: flex-end;
     justify-content: space-between;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
 }
 
 .admin-actions .form-group {
@@ -400,7 +421,7 @@ body {
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 1rem;
+    margin-top: 0.75rem;
 }
 
 thead {
@@ -409,7 +430,7 @@ thead {
 
 th,
 td {
-    padding: 0.75rem 1rem;
+    padding: 0.6rem 0.75rem;
     text-align: left;
     border-bottom: 1px solid #e0e7ff;
     vertical-align: top;
@@ -426,14 +447,14 @@ th {
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
 }
 
 .impact-card {
     background: linear-gradient(135deg, #f0f3ff 0%, #e0e7ff 100%);
     border-radius: 12px;
-    padding: 1rem;
+    padding: 0.75rem;
     text-align: center;
     border: 2px solid rgba(0, 150, 199, 0.2);
 }
@@ -453,7 +474,7 @@ th {
 .outreach-card {
     background: white;
     border-radius: 12px;
-    padding: 1rem;
+    padding: 0.75rem;
     border-left: 5px solid #ffb703;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
@@ -464,15 +485,15 @@ th {
 
 .event-list {
     display: grid;
-    gap: 1.25rem;
-    margin-top: 1rem;
+    gap: 1rem;
+    margin-top: 0.75rem;
 }
 
 .event-item {
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: 1rem;
-    padding: 1.25rem;
+    gap: 0.75rem;
+    padding: 1rem;
     background: #f9fbff;
     border-radius: 12px;
     border: 1px solid #e0e7ff;
@@ -516,7 +537,7 @@ th {
 .partner-card {
     background: #fff8f0;
     border-radius: 12px;
-    padding: 1.5rem;
+    padding: 1.2rem;
     text-align: center;
     font-weight: 600;
     color: #023e8a;
@@ -526,7 +547,7 @@ th {
 .gallery-item {
     background: #e0e7ff;
     border-radius: 12px;
-    padding: 2rem 1.25rem;
+    padding: 1.5rem 1rem;
     text-align: center;
     color: #023e8a;
     font-weight: 600;
@@ -587,13 +608,13 @@ th {
 /* Gallery */
 .gallery-roller {
     position: relative;
-    margin-top: 1.5rem;
+    margin-top: 0.75rem;
     overflow: hidden;
 }
 
 .gallery-track {
     display: flex;
-    gap: 1.5rem;
+    gap: 0.75rem;
     width: max-content;
     animation: gallery-scroll 20s linear infinite;
 }
@@ -611,7 +632,7 @@ th {
     cursor: pointer;
     box-shadow: 0 12px 24px rgba(2, 62, 138, 0.12);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    flex: 0 0 260px;
+    flex: 0 0 200px;
 }
 
 .gallery .gallery-item:hover {
@@ -621,7 +642,7 @@ th {
 
 .gallery .gallery-item img {
     width: 100%;
-    height: 200px;
+    height: 140px;
     object-fit: cover;
     display: block;
 }
@@ -711,13 +732,13 @@ th {
 .team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
 }
 
 .team-member {
     background: #f0f3ff;
-    padding: 1rem;
+    padding: 0.75rem;
     border-radius: 10px;
     text-align: center;
     border: 2px solid #0096c7;
@@ -760,27 +781,27 @@ th {
 .sponsor-tiers {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
 }
 
 .sponsor-card {
     background: linear-gradient(135deg, #fff8f0 0%, #ffe8d6 100%);
-    padding: 1rem;
+    padding: 0.75rem;
     border-radius: 10px;
     border-left: 5px solid #ffb703;
 }
 
 .sponsor-card h3 {
     color: #023e8a;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .sponsor-amount {
     color: #fb8500;
     font-size: 1.25rem;
     font-weight: bold;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
 }
 
 .sponsor-card ul {
@@ -791,7 +812,7 @@ th {
 .sponsor-card li {
     padding-left: 1.5rem;
     position: relative;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.35rem;
 }
 
 .sponsor-card li:before {
@@ -806,26 +827,26 @@ th {
 .sponsors-intro-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
 }
 
 /* Sponsor Logos Display */
 .sponsor-logos-section {
-    margin: 1.5rem 0;
+    margin: 1rem 0;
 }
 
 .sponsor-tier {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .tier-title {
     color: #023e8a;
     font-size: 1.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     text-align: center;
     border-bottom: 2px solid #ffb703;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.4rem;
 }
 
 .sponsor-logos {
@@ -914,12 +935,12 @@ th {
 .contact-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
 .contact-info {
     background: #f0f3ff;
-    padding: 1rem;
+    padding: 0.75rem;
     border-radius: 10px;
 }
 
@@ -927,14 +948,14 @@ th {
     color: #023e8a;
     border: none;
     display: block;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
 }
 
 .info-card {
     background: white;
-    padding: 1rem;
+    padding: 0.75rem;
     border-radius: 8px;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     border-left: 4px solid #ffb703;
 }
 
@@ -955,7 +976,7 @@ th {
 /* Contact Form */
 .contact-form {
     background: white;
-    padding: 1rem;
+    padding: 0.75rem;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
@@ -968,12 +989,12 @@ th {
 }
 
 .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.35rem;
     color: #023e8a;
     font-weight: 500;
 }
@@ -982,7 +1003,7 @@ th {
 .form-group textarea,
 .form-group select {
     width: 100%;
-    padding: 0.75rem;
+    padding: 0.6rem;
     border: 2px solid #e0e0e0;
     border-radius: 5px;
     font-family: inherit;
@@ -1048,12 +1069,12 @@ input[type="email"]:not([aria-invalid]) {
     background: #023e8a;
     color: white;
     text-align: center;
-    padding: 1rem 20px;
-    margin-top: 1rem;
+    padding: 0.75rem 20px;
+    margin-top: 0.75rem;
 }
 
 .footer p {
-    margin: 0.5rem 0;
+    margin: 0.35rem 0;
 }
 
 /* Chatbot */

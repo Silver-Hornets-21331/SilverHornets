@@ -183,7 +183,7 @@ const renderAdminEntries = () => {
         button.addEventListener("click", async () => {
             const entryId = button.getAttribute("data-approve");
             await updateDoc(doc(db, "hours", entryId), { approved: true });
-            showMessage("Hours approved!");
+            showMessage("✓ Hours approved!");
             await loadAdminData();
         });
     });
@@ -194,7 +194,7 @@ const renderAdminEntries = () => {
             if (!confirm("Reject these hours? This will delete the entry.")) return;
             const entryId = button.getAttribute("data-reject");
             await deleteDoc(doc(db, "hours", entryId));
-            showMessage("Hours rejected and removed.");
+            showMessage("✓ Hours rejected and removed.");
             await loadAdminData();
         });
     });
@@ -235,7 +235,7 @@ const downloadCsv = (rows, filename) => {
 const exportAdminCsv = () => {
     const filtered = getAdminFilteredEntries();
     if (filtered.length === 0) {
-        showMessage("No entries to export.", true);
+        showMessage("❌ No entries to export.", true);
         return;
     }
 
@@ -267,7 +267,7 @@ const exportAdminCsv = () => {
     });
 
     downloadCsv(rows, filename);
-    showMessage("CSV downloaded.");
+    showMessage("✓ CSV downloaded.");
 };
 
 const loadAdminData = async () => {
@@ -362,13 +362,13 @@ form?.addEventListener("submit", async (event) => {
 
     if (duration <= 0) {
         console.log("❌ Invalid duration");
-        showMessage("End time must be after start time.", true);
+        showMessage("❌ End time must be after start time.", true);
         return;
     }
 
     if (!auth.currentUser) {
         console.log("❌ No user logged in!");
-        showMessage("You must be logged in to add hours.", true);
+        showMessage("❌ You must be logged in to add hours.", true);
         return;
     }
 
@@ -399,7 +399,7 @@ form?.addEventListener("submit", async (event) => {
         console.log("✅ Entry saved successfully! Document ID:", docRef.id);
         form.reset();
         updateDurationPreview();
-        showMessage("Entry saved!");
+        showMessage("✓ Entry saved!");
         await loadEntries(auth.currentUser.uid);
     } catch (error) {
         console.error("❌ ERROR SAVING ENTRY:");
@@ -408,11 +408,11 @@ form?.addEventListener("submit", async (event) => {
         console.error("Full error:", error);
         
         if (error.code === 'permission-denied') {
-            showMessage("Permission denied. Check: 1) You're logged in, 2) Firestore rules are published, 3) Member profile exists", true);
+            showMessage("❌ Permission denied. Check: 1) You're logged in, 2) Firestore rules are published, 3) Member profile exists", true);
         } else if (error.code === 'failed-precondition') {
-            showMessage("Index required. Click the link in the console to create it.", true);
+            showMessage("❌ Index required. Click the link in the console to create it.", true);
         } else {
-            showMessage(`Error: ${error.message}`, true);
+            showMessage(`❌ Error: ${error.message}`, true);
         }
     }
 });

@@ -9,7 +9,7 @@ Your website code is working correctly, but Firebase needs to be configured. Fol
 ## Step 1: Initialize Firestore Database
 
 1. Go to [Firebase Console](https://console.firebase.google.com)
-2. Select your project: **ftc213312026db**
+2. Select your project: **silverhornetsdatabase-ce0f9**
 3. In the left menu, click **"Firestore Database"**
 4. Click **"Create database"** button
 5. Choose **"Start in test mode"** (we'll add security rules next)

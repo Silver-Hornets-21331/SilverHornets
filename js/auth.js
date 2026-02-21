@@ -27,7 +27,12 @@ const validateEmail = (email) => {
 const showMessage = (text, isError = false) => {
     if (!messageEl) return;
     messageEl.textContent = text;
-    messageEl.classList.toggle("error", isError);
+    messageEl.classList.remove("error", "success");
+    if (isError) {
+        messageEl.classList.add("error");
+    } else if (text && text.includes("✓") || text.includes("success") || text.includes("Redirecting")) {
+        messageEl.classList.add("success");
+    }
 };
 
 const setLoadingState = (isLoading, button) => {
@@ -60,15 +65,28 @@ loginForm?.addEventListener("submit", async (event) => {
 
     try {
         await signInWithEmailAndPassword(auth, email, password);
-        showMessage("Signed in! Redirecting...");
+        showMessage("✓ Signed in! Redirecting...");
         setTimeout(() => {
             window.location.href = "hours.html";
         }, 1500);
     } catch (error) {
-        if (error.code === 'auth/invalid-credential') {
-            showMessage("Incorrect email or password.", true);
+        console.error("Login error:", error.code, error.message);
+        
+        // Show user-friendly error messages
+        if (error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password') {
+            showMessage("❌ Incorrect email or password. Please try again.", true);
+        } else if (error.code === 'auth/user-not-found') {
+            showMessage("❌ No account found with this email. Please create an account.", true);
+        } else if (error.code === 'auth/invalid-email') {
+            showMessage("❌ Invalid email format.", true);
+        } else if (error.code === 'auth/user-disabled') {
+            showMessage("❌ This account has been disabled. Contact your coach.", true);
+        } else if (error.code === 'auth/too-many-requests') {
+            showMessage("❌ Too many failed attempts. Please wait a few minutes and try again.", true);
+        } else if (error.code === 'auth/network-request-failed') {
+            showMessage("❌ Network error. Check your internet connection.", true);
         } else {
-            showMessage(error.message, true);
+            showMessage(`❌ Error: ${error.message}`, true);
         }
     } finally {
         setLoadingState(false, submitBtn);
@@ -138,7 +156,7 @@ registerForm?.addEventListener("submit", async (event) => {
         });
         
         console.log("✅ Registration complete!");
-        showMessage("Account created! Redirecting...");
+        showMessage("✓ Account created! Redirecting...");
         setTimeout(() => {
             window.location.href = "hours.html";
         }, 1500);
@@ -147,12 +165,21 @@ registerForm?.addEventListener("submit", async (event) => {
         console.error("Error code:", error.code);
         console.error("Error message:", error.message);
         
-        if (error.code === 'permission-denied') {
-            showMessage("Database error. Please check that Firestore is set up correctly.", true);
-        } else if (error.code === 'auth/email-already-in-use') {
-            showMessage("This User ID is already registered. Please sign in instead.", true);
+        // Show user-friendly error messages
+        if (error.code === 'auth/email-already-in-use') {
+            showMessage("❌ This email is already registered. Please sign in instead.", true);
+        } else if (error.code === 'auth/weak-password') {
+            showMessage("❌ Password is too weak. Use at least 6 characters.", true);
+        } else if (error.code === 'auth/invalid-email') {
+            showMessage("❌ Invalid email format.", true);
+        } else if (error.code === 'permission-denied') {
+            showMessage("❌ Database error. Please ensure Firestore is set up correctly.", true);
+        } else if (error.code === 'auth/operation-not-allowed') {
+            showMessage("❌ Registration is currently disabled. Contact your coach.", true);
+        } else if (error.code === 'auth/network-request-failed') {
+            showMessage("❌ Network error. Check your internet connection.", true);
         } else {
-            showMessage(error.message, true);
+            showMessage(`❌ Error: ${error.message}`, true);
         }
     } finally {
         setLoadingState(false, submitBtn);
@@ -174,7 +201,7 @@ resetButton?.addEventListener("click", async () => {
 
     try {
         await sendPasswordResetEmail(auth, email);
-        showMessage("Password reset email sent.");
+        showMessage("✓ Password reset email sent. Check your inbox.");
     } catch (error) {
         showMessage(error.message, true);
     }

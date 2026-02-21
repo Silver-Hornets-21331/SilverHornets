@@ -4,7 +4,7 @@
 // Copy these rules to your Firebase Console
 // 
 // 1. Go to: https://console.firebase.google.com
-// 2. Select your project: ftc213312026db
+// 2. Select your project: silverhornetsdatabase-ce0f9
 // 3. Click "Firestore Database" in left menu
 // 4. Click "Rules" tab
 // 5. Replace ALL existing rules with the code below
