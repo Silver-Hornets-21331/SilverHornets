@@ -73,8 +73,24 @@
                     <div class="form-group">
                         <label for="register-password">Password *</label>
                         <div class="password-field">
-                            <input type="password" id="register-password" name="password" placeholder="At least 6 characters" minlength="6" required>
+                            <input type="password" id="register-password" name="password" placeholder="Create a strong password" minlength="8" required>
                             <button type="button" class="password-toggle" data-target="register-password" aria-label="Toggle password visibility">👁️</button>
+                        </div>
+                        <div class="password-requirements" id="password-requirements">
+                            <small style="color: #666; font-size: 0.85rem; display: block; margin-bottom: 0.3rem;">Password must contain:</small>
+                            <ul style="list-style: none; margin: 0; padding: 0; font-size: 0.85rem;">
+                                <li id="req-length" class="requirement">❌ At least 8 characters</li>
+                                <li id="req-uppercase" class="requirement">❌ One uppercase letter</li>
+                                <li id="req-lowercase" class="requirement">❌ One lowercase letter</li>
+                                <li id="req-number" class="requirement">❌ One number</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-confirm-password">Confirm Password *</label>
+                        <div class="password-field">
+                            <input type="password" id="register-confirm-password" name="confirm-password" placeholder="Re-enter your password" minlength="8" required>
+                            <button type="button" class="password-toggle" data-target="register-confirm-password" aria-label="Toggle password visibility">👁️</button>
                         </div>
                     </div>
                     <button type="submit" class="cta-button">Create Account</button>

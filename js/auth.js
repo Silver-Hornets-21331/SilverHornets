@@ -24,6 +24,21 @@ const validateEmail = (email) => {
     return emailRegex.test(email);
 };
 
+const validatePassword = (password) => {
+    const requirements = {
+        length: password.length >= 8,
+        uppercase: /[A-Z]/.test(password),
+        lowercase: /[a-z]/.test(password),
+        number: /[0-9]/.test(password)
+    };
+    return requirements;
+};
+
+const isPasswordValid = (password) => {
+    const reqs = validatePassword(password);
+    return reqs.length && reqs.uppercase && reqs.lowercase && reqs.number;
+};
+
 const showMessage = (text, isError = false) => {
     if (!messageEl) return;
     messageEl.textContent = text;
@@ -104,6 +119,21 @@ registerForm?.addEventListener("submit", async (event) => {
     const email = document.getElementById("register-email").value.trim();
     const inviteCode = document.getElementById("register-invite").value.trim();
     const password = document.getElementById("register-password").value.trim();
+    const confirmPassword = document.getElementById("register-confirm-password").value.trim();
+
+    // Validate password strength
+    if (!isPasswordValid(password)) {
+        showMessage("❌ Password does not meet security requirements.", true);
+        setLoadingState(false, submitBtn);
+        return;
+    }
+
+    // Validate passwords match
+    if (password !== confirmPassword) {
+        showMessage("❌ Passwords do not match. Please try again.", true);
+        setLoadingState(false, submitBtn);
+        return;
+    }
 
     // Validate invite code
     if (!VALID_INVITE_CODES.includes(inviteCode.toUpperCase())) {
@@ -267,6 +297,45 @@ if (registerEmailInput) {
         clearTimeout(checkTimeout);
         if (messageEl?.textContent.includes("already registered")) {
             showMessage("");
+        }
+    });
+}
+
+// Real-time password validation
+const passwordInput = document.getElementById("register-password");
+if (passwordInput) {
+    passwordInput.addEventListener("input", () => {
+        const password = passwordInput.value;
+        const reqs = validatePassword(password);
+        
+        // Update requirement indicators
+        const lengthEl = document.getElementById("req-length");
+        const upperEl = document.getElementById("req-uppercase");
+        const lowerEl = document.getElementById("req-lowercase");
+        const numberEl = document.getElementById("req-number");
+        
+        if (lengthEl) {
+            lengthEl.textContent = (reqs.length ? "✅" : "❌") + " At least 8 characters";
+            lengthEl.style.color = reqs.length ? "#28a745" : "#666";
+        }
+        if (upperEl) {
+            upperEl.textContent = (reqs.uppercase ? "✅" : "❌") + " One uppercase letter";
+            upperEl.style.color = reqs.uppercase ? "#28a745" : "#666";
+        }
+        if (lowerEl) {
+            lowerEl.textContent = (reqs.lowercase ? "✅" : "❌") + " One lowercase letter";
+            lowerEl.style.color = reqs.lowercase ? "#28a745" : "#666";
+        }
+        if (numberEl) {
+            numberEl.textContent = (reqs.number ? "✅" : "❌") + " One number";
+            numberEl.style.color = reqs.number ? "#28a745" : "#666";
+        }
+        
+        // Update border color
+        if (password.length > 0) {
+            passwordInput.style.borderColor = isPasswordValid(password) ? "#28a745" : "#ffc107";
+        } else {
+            passwordInput.style.borderColor = "";
         }
     });
 }
