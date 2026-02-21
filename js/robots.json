@@ -1,0 +1,37 @@
+{
+  "robots": [
+    {
+      "season": "2025-2026 Season",
+      "name": "Current Robot",
+      "description": "Our latest competitive robot featuring cutting-edge design and innovation.",
+      "image": "images/robot-2025.png",
+      "features": [
+        "Advanced vision system",
+        "Precision mecanum drive",
+        "Autonomous navigation"
+      ]
+    },
+    {
+      "season": "2024-2025 Season",
+      "name": "Previous Robot",
+      "description": "A proven performer that helped us achieve tournament success.",
+      "image": "images/robot-2024.jpg",
+      "features": [
+        "Dual-arm manipulator",
+        "Quick release mechanism",
+        "Enhanced stability"
+      ]
+    },
+    {
+      "season": "2023-2024 Season",
+      "name": "Legacy Robot",
+      "description": "The foundation of our program's competitive excellence.",
+      "image": "images/robot-2023.jpg",
+      "features": [
+        "Modular design",
+        "Efficient power management",
+        "Competition tested"
+      ]
+    }
+  ]
+}
