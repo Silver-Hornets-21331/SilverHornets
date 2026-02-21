@@ -313,9 +313,43 @@ body {
     margin-bottom: 0.5rem;
 }
 
+.auth-card {
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.auth-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
+    margin-top: 0;
+    text-align: center;
+}
+
+.auth-card .muted {
+    text-align: center;
+    margin-bottom: 0.75rem;
+    font-size: 0.85rem;
+}
+
 .stacked-form h3 {
     color: #023e8a;
     margin-bottom: 0.5rem;
+}
+
+.stacked-form {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .hours-card h3,
@@ -1170,6 +1204,25 @@ th {
     font-family: inherit;
     font-size: 0.95rem;
     transition: border-color 0.3s ease;
+}
+
+/* Compact login inputs */
+#login-form .form-group input {
+    padding: 0.4rem 0.5rem;
+    font-size: 0.9rem;
+}
+
+#login-form .form-group {
+    margin-bottom: 0.4rem;
+}
+
+#login-form .password-toggle {
+    font-size: 1.1rem;
+    padding: 0.4rem;
+}
+
+#login-form .cta-button {
+    margin-top: 0.3rem;
 }
 
 .form-group input:focus,

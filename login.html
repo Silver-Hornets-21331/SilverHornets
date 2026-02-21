@@ -32,8 +32,8 @@
     <section class="section">
         <div class="container">
             <div class="auth-card">
-                <h2>Welcome back</h2>
-                <p class="muted">Sign in to log your hours. New members can create an account.</p>
+                <h2 id="auth-heading">Welcome back</h2>
+                <p class="muted" id="auth-subtitle">Sign in to log your hours. New members can create an account.</p>
 
                 <div id="auth-message" class="notice" aria-live="polite"></div>
 
@@ -50,13 +50,15 @@
                         </div>
                     </div>
                     <button type="submit" class="cta-button">Sign In</button>
-                    <button type="button" class="link-button" id="reset-password">Forgot password?</button>
+                    <div style="display: flex; gap: 0.5rem; justify-content: space-between; margin-top: 0.5rem;">
+                        <button type="button" class="link-button" id="reset-password">Forgot password?</button>
+                        <button type="button" class="link-button" id="show-register">Create account</button>
+                    </div>
                 </form>
 
-                <div class="divider"></div>
+                <div class="divider" id="register-divider" style="display: none;"></div>
 
-                <form id="register-form" class="stacked-form">
-                    <h3>Create an account</h3>
+                <form id="register-form" class="stacked-form" style="display: none;">
                     <div class="form-group">
                         <label for="register-name">Full Name *</label>
                         <input type="text" id="register-name" name="name" placeholder="Your name" required>
@@ -94,6 +96,7 @@
                         </div>
                     </div>
                     <button type="submit" class="cta-button">Create Account</button>
+                    <button type="button" class="link-button" id="back-to-login" style="margin-top: 0.5rem;">Back to Login</button>
                 </form>
             </div>
         </div>
@@ -132,6 +135,38 @@
     <script type="module" src="js/firebase-config.js"></script>
     <script type="module" src="js/auth.js"></script>
     <script>
+        // Toggle registration form
+        document.addEventListener('DOMContentLoaded', () => {
+            const showRegisterBtn = document.getElementById('show-register');
+            const backToLoginBtn = document.getElementById('back-to-login');
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            const registerDivider = document.getElementById('register-divider');
+            const authMessage = document.getElementById('auth-message');
+            const authHeading = document.getElementById('auth-heading');
+            const authSubtitle = document.getElementById('auth-subtitle');
+            
+            showRegisterBtn?.addEventListener('click', () => {
+                loginForm.style.display = 'none';
+                registerDivider.style.display = 'block';
+                registerForm.style.display = 'block';
+                authHeading.textContent = 'Create an account';
+                authSubtitle.textContent = 'Join the Silver Hornets team and start logging your hours.';
+                authMessage.textContent = '';
+                authMessage.classList.remove('error', 'success');
+            });
+            
+            backToLoginBtn?.addEventListener('click', () => {
+                registerForm.style.display = 'none';
+                registerDivider.style.display = 'none';
+                loginForm.style.display = 'block';
+                authHeading.textContent = 'Welcome back';
+                authSubtitle.textContent = 'Sign in to log your hours. New members can create an account.';
+                authMessage.textContent = '';
+                authMessage.classList.remove('error', 'success');
+            });
+        });
+        
         // Password visibility toggle
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.password-toggle').forEach(button => {
