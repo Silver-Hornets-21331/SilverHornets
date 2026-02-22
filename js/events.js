@@ -13,13 +13,17 @@ function displayEvents(events) {
     const eventList = document.querySelector('.event-list');
     if (!eventList) return;
     
-    // Sort events by date (earliest first)
-    const sortedEvents = events.sort((a, b) => new Date(a.date) - new Date(b.date));
+    // Sort events by start date in ascending order (earliest first)
+    const sortedEvents = [...events].sort((a, b) => {
+        const firstDate = parseEventDate(a.date);
+        const secondDate = parseEventDate(b.date);
+        return firstDate - secondDate;
+    });
     
     // Filter to show only upcoming events (from today onwards)
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    const upcomingEvents = sortedEvents.filter(event => new Date(event.date) >= today);
+    const upcomingEvents = sortedEvents.filter(event => parseEventDate(event.date) >= today);
     
     // Clear existing events
     eventList.innerHTML = '';
@@ -35,6 +39,13 @@ function displayEvents(events) {
         const eventItem = createEventItem(event);
         eventList.appendChild(eventItem);
     });
+}
+
+function parseEventDate(dateString) {
+    if (!dateString) return new Date(8640000000000000);
+    const [year, month, day] = dateString.split('-').map(Number);
+    if (!year || !month || !day) return new Date(8640000000000000);
+    return new Date(year, month - 1, day);
 }
 
 function createEventItem(event) {

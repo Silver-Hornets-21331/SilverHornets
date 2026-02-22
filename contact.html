@@ -19,6 +19,7 @@
                 <li><a href="team.html">Team</a></li>
                 <li><a href="sponsors.html">Sponsors</a></li>
                 <li><a href="outreach.html">Outreach</a></li>
+                <li><a href="training.html">Training</a></li>
                 <li><a href="contact.html" class="active">Contact</a></li>
                 <li><a href="login.html">Member Login</a></li>
             </ul>
@@ -62,7 +63,7 @@
 
             <div class="contact-form">
                 <h2>Send us a Message</h2>
-                <form>
+                <form id="contact-form" novalidate>
                     <div class="form-group">
                         <label for="name">Name *</label>
                         <input type="text" id="name" name="name" required>
@@ -83,6 +84,7 @@
                         <textarea id="message" name="message" rows="4" required></textarea>
                     </div>
 
+                    <div id="contact-notice" class="notice" role="status" aria-live="polite"></div>
                     <button type="submit" class="cta-button">Send Message</button>
                 </form>
             </div>
@@ -118,6 +120,7 @@
         </div>
     </footer>
 
+    <script src="js/contact.js" defer></script>
     <script src="js/chatbot.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FTC Limelight Training - Silver Hornets FTC Team 21331</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img class="logo-image" src="images/2025-04-28%20-%20SIlver%20Hornets%20Logo.png" alt="Silver Hornets logo">
+                <span>Silver Hornets</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="sponsors.html">Sponsors</a></li>
+                <li><a href="outreach.html">Outreach</a></li>
+                <li><a href="training.html" class="active">Training</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Member Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1>FTC Limelight Training</h1>
+        <p class="page-subtitle">For Middle School Robotics Students</p>
+        <p>Goal: Use Limelight 3A vision data in Java to align faster and improve autonomous accuracy.</p>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <h2>1. What is Limelight 3A?</h2>
+            <p>Limelight 3A is a vision camera used in FTC to detect targets and provide useful values like horizontal offset, vertical offset, and target visibility.</p>
+            <ul>
+                <li><b>Target tracking:</b> Detect tags and objects.</li>
+                <li><b>Alignment support:</b> Help drivers line up faster in TeleOp.</li>
+                <li><b>Autonomous support:</b> Improve consistency when approaching scoring locations.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2>2. Key Limelight Concepts</h2>
+
+            <h3>2.1 Valid Target</h3>
+            <p>Always check whether Limelight currently sees a valid target before applying corrections.</p>
+
+            <h3>2.2 Offsets</h3>
+            <ul>
+                <li><code>tx</code>: horizontal offset (left/right error)</li>
+                <li><code>ty</code>: vertical offset (up/down angle error)</li>
+            </ul>
+
+            <h3>2.3 Pipeline</h3>
+            <p>A pipeline defines what vision processing mode Limelight is using. Teams often create different pipelines for AprilTags and game elements.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2>3. Basic Java Workflow</h2>
+            <pre>
+// 1) Read Limelight result values
+// 2) Check if target is valid
+// 3) Use tx to compute turn correction
+// 4) Send correction to drivetrain motors
+            </pre>
+
+            <p><b>Tip:</b> Keep your turn correction capped so alignment stays smooth and controllable.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2>4. Simple Alignment Example (Concept)</h2>
+            <pre>
+double error = 0 - tx;
+double turnPower = kP * error;
+turnPower = Math.max(-0.35, Math.min(0.35, turnPower));
+
+leftDrive.setPower(-turnPower);
+rightDrive.setPower(turnPower);
+
+if (Math.abs(error) < 1.0) {
+    leftDrive.setPower(0);
+    rightDrive.setPower(0);
+}
+            </pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2>5. Practice Activities</h2>
+            <ul>
+                <li>Run a valid-target check and show status in telemetry.</li>
+                <li>Display <code>tx</code> and <code>ty</code> values every loop.</li>
+                <li>Tune <code>kP</code> so alignment is fast but not shaky.</li>
+                <li>Align to a target and stop within ±1.0 degrees of horizontal error.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2>6. Reference Links</h2>
+            <ul>
+                <li><a href="https://docs.limelightvision.io/docs/docs-limelight/getting-started/limelight-3a" target="_blank" rel="noopener noreferrer">Limelight 3A Getting Started</a></li>
+                <li><a href="https://ftc-docs.firstinspires.org/" target="_blank" rel="noopener noreferrer">FTC Docs (FIRST Tech Challenge)</a></li>
+                <li><a href="https://docs.revrobotics.com/duo-control" target="_blank" rel="noopener noreferrer">REV Hub Documentation (Control Hub & Expansion Hub)</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="chatbot" data-bot-name="SHBot">
+        <button class="chatbot-toggle" type="button" aria-expanded="false" aria-controls="chatbot-panel">Chat with SHBot</button>
+        <div class="chatbot-panel" id="chatbot-panel" role="dialog" aria-label="SHBot chat" aria-hidden="true">
+            <div class="chatbot-header">
+                <div class="chatbot-header-brand">
+                    <img class="chatbot-logo" src="images/SilverHornet.svg" alt="Silver Hornets logo">
+                    <div>
+                        <p class="chatbot-title">SHBot</p>
+                        <p class="chatbot-subtitle">Ask about the team</p>
+                    </div>
+                </div>
+                <button class="chatbot-close" type="button" aria-label="Close chat">✕</button>
+            </div>
+            <div class="chatbot-messages" aria-live="polite"></div>
+            <form class="chatbot-form" autocomplete="off">
+                <label class="sr-only" for="chatbot-input">Type your message</label>
+                <input class="chatbot-input" id="chatbot-input" name="message" type="text" placeholder="Ask about outreach, sponsors, or meetings" />
+                <button class="chatbot-send" type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Silver Hornets FTC Team 21331. All rights reserved.</p>
+            <p>Committed to FIRST principles and robotics excellence.</p>
+        </div>
+    </footer>
+
+    <script src="js/chatbot.js" defer></script>
+</body>
+</html>
