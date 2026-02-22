@@ -26,97 +26,171 @@
         </div>
     </nav>
 
-    <header class="page-header">
-        <h1>FTC Limelight Training</h1>
-        <p class="page-subtitle">For Middle School Robotics Students</p>
-        <p>Goal: Use Limelight 3A vision data in Java to align faster and improve autonomous accuracy.</p>
-    </header>
-
-    <section class="section">
-        <div class="container">
-            <h2>1. What is Limelight 3A?</h2>
-            <p>Limelight 3A is a vision camera used in FTC to detect targets and provide useful values like horizontal offset, vertical offset, and target visibility.</p>
-            <ul>
-                <li><b>Target tracking:</b> Detect tags and objects.</li>
-                <li><b>Alignment support:</b> Help drivers line up faster in TeleOp.</li>
-                <li><b>Autonomous support:</b> Improve consistency when approaching scoring locations.</li>
-            </ul>
+        <div class="section">
+            <h1>Limelight 3A Vision Training</h1>
+            <h3>Helping FTC Robots See the Field</h3>
+            <p>
+                The <b>Limelight 3A</b> is a smart vision camera used in robotics to help your robot
+                detect objects, find targets, and line up automatically. It uses LEDs, a fast processor,
+                and built‑in software to track things on the field.
+            </p>
         </div>
-    </section>
 
-    <section class="section">
-        <div class="container">
-            <h2>2. Key Limelight Concepts</h2>
-
-            <h3>2.1 Valid Target</h3>
-            <p>Always check whether Limelight currently sees a valid target before applying corrections.</p>
-
-            <h3>2.2 Offsets</h3>
+        <div class="section">
+            <h2>1. What Is the Limelight 3A?</h2>
+            <p>
+                The Limelight 3A is a small green‑glowing camera that helps your robot “see.”
+                It can detect:
+            </p>
             <ul>
-                <li><code>tx</code>: horizontal offset (left/right error)</li>
-                <li><code>ty</code>: vertical offset (up/down angle error)</li>
+                <li>AprilTags</li>
+                <li>Game elements</li>
+                <li>Targets or markers</li>
+                <li>Objects you train it to recognize</li>
             </ul>
 
-            <h3>2.3 Pipeline</h3>
-            <p>A pipeline defines what vision processing mode Limelight is using. Teams often create different pipelines for AprilTags and game elements.</p>
+            <p>
+                FTC teams use it mostly for <b>Autonomous</b> to help the robot know where it is
+                and what it should do next.
+            </p>
         </div>
-    </section>
 
-    <section class="section">
-        <div class="container">
-            <h2>3. Basic Java Workflow</h2>
+        <div class="section">
+            <h2>2. Why Teams Use Limelight</h2>
+            <ul>
+                <li>It finds AprilTags very accurately</li>
+                <li>It works even in bright or dark lighting</li>
+                <li>It gives your robot real‑time position data</li>
+                <li>It reduces guesswork in autonomous</li>
+                <li>It’s easier than writing your own vision code</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>3. How Limelight Connects to Your Robot</h2>
+            <p>
+                The Limelight 3A connects to your FTC robot using:
+            </p>
+            <ul>
+                <li><b>USB</b> (for power)</li>
+                <li><b>Ethernet</b> (for data)</li>
+            </ul>
+
+            <p>
+                Your robot reads the Limelight’s data using a network table or JSON output.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>4. What the Limelight Sends to Your Robot</h2>
+            <p>The Limelight gives your robot important information such as:</p>
+
+            <ul>
+                <li><b>tx</b> – horizontal offset (left/right)</li>
+                <li><b>ty</b> – vertical offset (up/down)</li>
+                <li><b>ta</b> – target area (how big the object looks)</li>
+                <li><b>AprilTag ID</b> – which tag it sees</li>
+                <li><b>Robot pose</b> – where the robot is on the field</li>
+            </ul>
+
+            <p>
+                Your robot can use this to turn, drive, or align automatically.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>5. Simple FTC Java Example</h2>
+            <p>
+                This example shows how your robot might read Limelight data.
+                (This is simplified for teaching.)
+            </p>
+
             <pre>
-// 1) Read Limelight result values
-// 2) Check if target is valid
-// 3) Use tx to compute turn correction
-// 4) Send correction to drivetrain motors
+// Example: reading Limelight values
+double tx = limelight.getTX();  // left/right offset
+double ty = limelight.getTY();  // up/down offset
+double ta = limelight.getTA();  // target area
+
+// If the target is left, turn left
+if (tx < -2) {
+        leftDrive.setPower(-0.2);
+        rightDrive.setPower(0.2);
+}
+
+// If the target is right, turn right
+else if (tx > 2) {
+        leftDrive.setPower(0.2);
+        rightDrive.setPower(-0.2);
+}
+
+// If centered, drive forward
+else {
+        leftDrive.setPower(0.3);
+        rightDrive.setPower(0.3);
+}
             </pre>
 
-            <p><b>Tip:</b> Keep your turn correction capped so alignment stays smooth and controllable.</p>
+            <div class="exercise">
+                <b>Try this:</b>
+                <ul>
+                    <li>Change the turn speed from 0.2 to 0.1</li>
+                    <li>Add a condition to stop if <code>ta</code> is too large</li>
+                    <li>Add telemetry to print <code>tx</code> and <code>ty</code></li>
+                </ul>
+            </div>
         </div>
-    </section>
 
-    <section class="section">
-        <div class="container">
-            <h2>4. Simple Alignment Example (Concept)</h2>
+        <div class="section">
+            <h2>6. Using Limelight for AprilTags</h2>
+            <p>
+                The Limelight 3A can detect AprilTags automatically. This helps your robot:
+            </p>
+            <ul>
+                <li>Know which side of the field it’s on</li>
+                <li>Choose the correct autonomous path</li>
+                <li>Score more accurately</li>
+            </ul>
+
+            <p>Example: reading the AprilTag ID</p>
+
             <pre>
-double error = 0 - tx;
-double turnPower = kP * error;
-turnPower = Math.max(-0.35, Math.min(0.35, turnPower));
+int tagID = limelight.getAprilTagID();
 
-leftDrive.setPower(-turnPower);
-rightDrive.setPower(turnPower);
-
-if (Math.abs(error) < 1.0) {
-    leftDrive.setPower(0);
-    rightDrive.setPower(0);
+if (tagID == 1) {
+        // left spike mark
+} else if (tagID == 2) {
+        // center spike mark
+} else if (tagID == 3) {
+        // right spike mark
 }
             </pre>
         </div>
-    </section>
 
-    <section class="section">
-        <div class="container">
-            <h2>5. Practice Activities</h2>
+        <div class="section">
+            <h2>7. Practice Challenges</h2>
             <ul>
-                <li>Run a valid-target check and show status in telemetry.</li>
-                <li>Display <code>tx</code> and <code>ty</code> values every loop.</li>
-                <li>Tune <code>kP</code> so alignment is fast but not shaky.</li>
-                <li>Align to a target and stop within ±1.0 degrees of horizontal error.</li>
+                <li>Use Limelight to center your robot on a target</li>
+                <li>Use AprilTags to choose between 3 autonomous paths</li>
+                <li>Make the robot stop when it gets close to the target</li>
+                <li>Print Limelight values on telemetry</li>
             </ul>
         </div>
-    </section>
 
-    <section class="section">
-        <div class="container">
-            <h2>6. Reference Links</h2>
-            <ul>
-                <li><a href="https://docs.limelightvision.io/docs/docs-limelight/getting-started/limelight-3a" target="_blank" rel="noopener noreferrer">Limelight 3A Getting Started</a></li>
-                <li><a href="https://ftc-docs.firstinspires.org/" target="_blank" rel="noopener noreferrer">FTC Docs (FIRST Tech Challenge)</a></li>
-                <li><a href="https://docs.revrobotics.com/duo-control" target="_blank" rel="noopener noreferrer">REV Hub Documentation (Control Hub & Expansion Hub)</a></li>
-            </ul>
+        <div class="section">
+            <h2>8. Limelight 3A Reference Link</h2>
+            <p>
+                <b>Official Limelight Website:</b><br>
+                <a href="https://limelightvision.io" target="_blank" rel="noopener noreferrer">
+                    https://limelightvision.io
+                </a>
+            </p>
+            <p>
+                <b>Limelight 3A Product Page:</b><br>
+                <a href="https://limelightvision.io/products/limelight-3" target="_blank" rel="noopener noreferrer">
+                    https://limelightvision.io/products/limelight-3
+                </a>
+            </p>
         </div>
-    </section>
 
     <div class="chatbot" data-bot-name="SHBot">
         <button class="chatbot-toggle" type="button" aria-expanded="false" aria-controls="chatbot-panel">Chat with SHBot</button>
