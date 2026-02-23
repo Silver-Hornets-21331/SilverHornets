@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FTC Team Website Training for Middle School Students</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img class="logo-image" src="images/2025-04-28%20-%20SIlver%20Hornets%20Logo.png" alt="Silver Hornets logo">
+                <span>Silver Hornets</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="sponsors.html">Sponsors</a></li>
+                <li><a href="outreach.html">Outreach</a></li>
+                <li><a href="training.html" class="active">Training</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Member Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1>FTC Team Website Training</h1>
+        <p class="page-subtitle">For Middle School Robotics Students</p>
+        <p>Goal: Build a simple, clean website for your FTC team using HTML and a little CSS.</p>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <h2>1. What is a website?</h2>
+            <p>
+                A website is a group of pages you can open in a browser (like Chrome or Edge).
+                Each page is usually written in a language called <b>HTML</b>.
+            </p>
+            <p>Your FTC team website can show:</p>
+            <ul>
+                <li>Team name, number, and logo</li>
+                <li>Pictures of your robot and events</li>
+                <li>Meet the team members</li>
+                <li>Engineering notebook highlights</li>
+                <li>Contact info and social media</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2>2. Basic HTML structure</h2>
+            <p>Every HTML page has a basic “skeleton” like this:</p>
+            <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;My FTC Team&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Welcome to Our FTC Team Website!&lt;/h1&gt;
+    &lt;p&gt;We are Team 12345.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+            </pre>
+
+            <p><b>Try this:</b></p>
+            <ul>
+                <li>Create a file called <code>index.html</code></li>
+                <li>Copy the skeleton above into it</li>
+                <li>Open it in a browser and see your first web page</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2>3. Important HTML tags</h2>
+            <ul>
+                <li><b>&lt;h1&gt;...&lt;/h1&gt;</b> – Big heading (page title)</li>
+                <li><b>&lt;h2&gt;...&lt;/h2&gt;</b> – Section heading</li>
+                <li><b>&lt;p&gt;...&lt;/p&gt;</b> – Paragraph of text</li>
+                <li><b>&lt;ul&gt;</b> and <b>&lt;li&gt;</b> – Bulleted list</li>
+                <li><b>&lt;img&gt;</b> – Image (picture)</li>
+                <li><b>&lt;a&gt;</b> – Link to another page or site</li>
+                <li><b>&lt;div&gt;</b> – Box/container for grouping content</li>
+                <li><b>&lt;footer&gt;</b> – Bottom section of the page</li>
+            </ul>
+
+            <pre>
+&lt;h1&gt;FTC Team 12345&lt;/h1&gt;
+&lt;p&gt;We love building robots and learning new things!&lt;/p&gt;
+
+&lt;h2&gt;Our Achievements&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Inspire Award Finalist&lt;/li&gt;
+  &lt;li&gt;Winning Alliance Captain&lt;/li&gt;
+&lt;/ul&gt;
+            </pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2>4. Adding images and links</h2>
+            <h3>4.1 Images</h3>
+            <p>Save your image in the same folder as your HTML file, for example <code>robot.jpg</code>.</p>
+            <pre>
+&lt;img src="robot.jpg" alt="Our FTC Robot" width="300"&gt;
+            </pre>
+
+            <h3>4.2 Links</h3>
+            <pre>
+&lt;a href="https://www.firstinspires.org/robotics/ftc" target="_blank"&gt;
+  Learn more about FTC
+&lt;/a&gt;
+            </pre>
+
+            <p><b>Try this:</b></p>
+            <ul>
+                <li>Add a picture of your robot to the page</li>
+                <li>Add a link to your team’s YouTube or Instagram</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2>5. Adding simple CSS for style</h2>
+            <p>
+                CSS controls how your website looks (colors, fonts, spacing).
+                Here is a simple style block you can put inside your <code>&lt;head&gt;</code>.
+            </p>
+
+            <pre>
+&lt;style&gt;
+  body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #222;
+  }
+  header {
+    text-align: center;
+    padding: 1rem 0;
+  }
+  h1, h2 {
+    color: #1b4b9c;
+  }
+&lt;/style&gt;
+            </pre>
+
+            <p><b>Try this:</b></p>
+            <ul>
+                <li>Change the background color</li>
+                <li>Change the heading color to your team color</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2>6. Starter layout for an FTC team website</h2>
+            <p>Here is a simple template you can customize for your team.</p>
+
+            <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;FTC Team 12345&lt;/title&gt;
+  &lt;style&gt;
+    body { font-family: Arial, sans-serif; background:#f5f7fb; margin:0; }
+    header, footer { background:#1b4b9c; color:white; text-align:center; padding:1rem; }
+    .content { padding:1rem 1.5rem; }
+    .section { background:white; margin-bottom:1rem; padding:1rem; border-radius:8px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;header&gt;
+    &lt;h1&gt;FTC Team 12345&lt;/h1&gt;
+    &lt;p&gt;Team Name – City, State&lt;/p&gt;
+  &lt;/header&gt;
+
+  &lt;div class="content"&gt;
+    &lt;div class="section"&gt;
+      &lt;h2&gt;About Our Team&lt;/h2&gt;
+      &lt;p&gt;We are a middle school FTC team that loves robots and learning.&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div class="section"&gt;
+      &lt;h2&gt;Our Robot&lt;/h2&gt;
+      &lt;img src="robot.jpg" alt="Our Robot" width="300"&gt;
+      &lt;p&gt;This is our robot for the current season.&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div class="section"&gt;
+      &lt;h2&gt;Meet the Team&lt;/h2&gt;
+      &lt;ul&gt;
+        &lt;li&gt;Student 1 – Role&lt;/li&gt;
+        &lt;li&gt;Student 2 – Role&lt;/li&gt;
+        &lt;li&gt;Student 3 – Role&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+
+    &lt;div class="section"&gt;
+      &lt;h2&gt;Contact Us&lt;/h2&gt;
+      &lt;p&gt;Email: team12345@example.com&lt;/p&gt;
+      &lt;p&gt;
+        &lt;a href="https://www.youtube.com" target="_blank"&gt;YouTube&lt;/a&gt; |
+        &lt;a href="https://www.instagram.com" target="_blank"&gt;Instagram&lt;/a&gt;
+      &lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;footer&gt;
+    &lt;p&gt;&copy; 2026 FTC Team 12345&lt;/p&gt;
+  &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2>7. Team practice checklist</h2>
+            <ul>
+                <li>Create an <code>index.html</code> file with your team name and number</li>
+                <li>Add an “About Our Team” section</li>
+                <li>Add at least one robot picture</li>
+                <li>Add a “Meet the Team” list with names and roles</li>
+                <li>Add links to your social media or videos</li>
+                <li>Customize colors to match your team branding</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h3>Next steps</h3>
+            <p>
+                Once your basic site works, you can add more pages:
+                <b>Robot Design</b>, <b>Outreach</b>, <b>Season Highlights</b>, and more.
+            </p>
+        </div>
+    </section>
+
+    <div class="chatbot" data-bot-name="SHBot">
+        <button class="chatbot-toggle" type="button" aria-expanded="false" aria-controls="chatbot-panel">Chat with SHBot</button>
+        <div class="chatbot-panel" id="chatbot-panel" role="dialog" aria-label="SHBot chat" aria-hidden="true">
+            <div class="chatbot-header">
+                <div class="chatbot-header-brand">
+                    <img class="chatbot-logo" src="images/SilverHornet.svg" alt="Silver Hornets logo">
+                    <div>
+                        <p class="chatbot-title">SHBot</p>
+                        <p class="chatbot-subtitle">Ask about the team</p>
+                    </div>
+                </div>
+                <button class="chatbot-close" type="button" aria-label="Close chat">✕</button>
+            </div>
+            <div class="chatbot-messages" aria-live="polite"></div>
+            <form class="chatbot-form" autocomplete="off">
+                <label class="sr-only" for="chatbot-input">Type your message</label>
+                <input class="chatbot-input" id="chatbot-input" name="message" type="text" placeholder="Ask about outreach, sponsors, or meetings" />
+                <button class="chatbot-send" type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Silver Hornets FTC Team 21331. All rights reserved.</p>
+            <p>Committed to FIRST principles and robotics excellence.</p>
+        </div>
+    </footer>
+
+    <script src="js/chatbot.js" defer></script>
+</body>
+</html>
