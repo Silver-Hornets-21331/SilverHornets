@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Servo Control</title>
+  <style>
+    body { font-family: "Segoe UI", Arial, sans-serif; margin: 0; background: #f5f8ff; color: #1f2a44; }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 24px 18px; }
+    section { background: #fff; border: 1px solid #dbe3f3; border-radius: 10px; padding: 16px; }
+    pre { background: #eef3ff; border: 1px solid #dbe3f3; border-radius: 8px; padding: 12px; overflow-x: auto; }
+    a { color: #1f5eff; text-decoration: none; }
+    .diagram { margin: 12px 0; border: 1px solid #dbe3f3; border-radius: 8px; padding: 10px; background: #fafcff; }
+    .flow { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .box { border: 1px solid #dbe3f3; border-radius: 8px; padding: 6px 10px; background: #fff; font-weight: 600; }
+    .arrow { color: #7a86a0; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <p><a href="basicTraining.html">← Back to training home</a></p>
+    <section>
+      <h1>Servo Control</h1>
+      <p><strong>Introduction:</strong> Servos move to a target position, which is useful for claws, linkages, and small mechanisms.</p>
+      <p><strong>Basic theory:</strong> Servo position is usually a normalized value from <code>0.0</code> to <code>1.0</code>. You set fixed positions for repeatable actions like open/close.</p>
+      <div class="diagram">
+        <svg viewBox="0 0 700 140" width="100%" height="140" role="img" aria-label="Servo position diagram">
+          <line x1="80" y1="90" x2="620" y2="90" stroke="#9eb0d6" stroke-width="6"></line>
+          <line x1="80" y1="70" x2="80" y2="110" stroke="#7a86a0" stroke-width="2"></line>
+          <line x1="350" y1="70" x2="350" y2="110" stroke="#7a86a0" stroke-width="2"></line>
+          <line x1="620" y1="70" x2="620" y2="110" stroke="#7a86a0" stroke-width="2"></line>
+          <polygon points="350,90 390,65 395,73 358,93" fill="#1f5eff"></polygon>
+          <text x="62" y="58" font-size="13" fill="#1f2a44">0.0</text>
+          <text x="338" y="58" font-size="13" fill="#1f2a44">0.5</text>
+          <text x="606" y="58" font-size="13" fill="#1f2a44">1.0</text>
+        </svg>
+      </div>
+      <div class="flow">
+        <div class="box">A/B button</div><div class="arrow">→</div>
+        <div class="box">choose position</div><div class="arrow">→</div>
+        <div class="box">armServo.setPosition()</div>
+      </div>
+      <pre><code>Servo armServo;
+
+@Override
+public void runOpMode() {
+
+    armServo = hardwareMap.get(Servo.class, "armServo");
+
+    waitForStart();
+
+    while (opModeIsActive()) {
+
+        if (gamepad1.a) {
+            armServo.setPosition(0.0);
+        }
+
+        if (gamepad1.b) {
+            armServo.setPosition(1.0);
+        }
+    }
+}</code></pre>
+      <p><strong>Position range:</strong> 0.0 one side, 0.5 center, 1.0 other side.</p>
+    </section>
+  </main>
+</body>
+</html>

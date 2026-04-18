@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Training - Silver Hornets FTC Team 21331</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img class="logo-image" src="images/2025-04-28%20-%20SIlver%20Hornets%20Logo.png" alt="Silver Hornets logo">
+                <span>Silver Hornets</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="sponsors.html">Sponsors</a></li>
+                <li><a href="outreach.html">Outreach</a></li>
+                <li><a href="basicTraining.html" class="active">Training</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Member Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1>FTC Java Training</h1>
+        <p class="page-subtitle">Choose a module and build FTC programming fundamentals.</p>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <div class="sponsor-card" style="margin-bottom: 0.8rem;">
+                <h2 style="margin-top: 0;">Prerequisites</h2>
+                <ul>
+                    <li>FTC Robot Controller and Driver Station apps installed and paired.</li>
+                    <li>Android Studio with FTC SDK project opened and build working.</li>
+                    <li>Basic Java syntax knowledge (variables, if statements, loops, methods).</li>
+                    <li>A configured robot in the FTC Robot Configuration file.</li>
+                </ul>
+            </div>
+
+            <div class="sponsor-card" style="margin-bottom: 0.8rem;">
+                <h2 style="margin-top: 0;">Required Hardware List</h2>
+                <ul>
+                    <li>Control Hub or Robot Controller phone.</li>
+                    <li>Driver Hub or Driver Station phone.</li>
+                    <li>At least one gamepad.</li>
+                    <li>1 DC motor (example name: <code>armMotor</code>).</li>
+                    <li>1 servo motor (example name: <code>armServo</code> or <code>clawServo</code>).</li>
+                    <li>12V FTC legal battery and power wiring.</li>
+                    <li>USB cable for programming/debugging.</li>
+                </ul>
+            </div>
+
+            <h2 style="margin-bottom: 0.6rem; margin-top: 0.6rem;">Training Modules</h2>
+            <div class="sponsor-tiers" style="grid-template-columns: repeat(4, 1fr); gap: 0.6rem;">
+                <a class="sponsor-card" href="telemetry.html" style="text-decoration: none; color: inherit; padding: 0.5rem;">
+                    <h3 style="margin-top: 0;">Telemetry Demo</h3>
+                    <p style="margin: 0;">LinearOpMode telemetry block</p>
+                </a>
+                <a class="sponsor-card" href="gamepad.html" style="text-decoration: none; color: inherit; padding: 0.5rem;">
+                    <h3 style="margin-top: 0;">Gamepad Input</h3>
+                    <p style="margin: 0;">Read stick and button input</p>
+                </a>
+                <a class="sponsor-card" href="motor.html" style="text-decoration: none; color: inherit; padding: 0.5rem;">
+                    <h3 style="margin-top: 0;">DC Motor Control</h3>
+                    <p style="margin: 0;">LinearOpMode motor snippet</p>
+                </a>
+                <a class="sponsor-card" href="servo.html" style="text-decoration: none; color: inherit; padding: 0.5rem;">
+                    <h3 style="margin-top: 0;">Servo Control</h3>
+                    <p style="margin: 0;">LinearOpMode servo snippet</p>
+                </a>
+                <a class="sponsor-card" href="full-example.html" style="text-decoration: none; color: inherit; padding: 0.5rem;">
+                    <h3 style="margin-top: 0;">Full Example</h3>
+                    <p style="margin: 0;">Combined beginner TeleOp</p>
+                </a>
+                <a class="sponsor-card" href="limelight-training.html" style="text-decoration: none; color: inherit; padding: 0.5rem;">
+                    <h3 style="margin-top: 0;">Limelight Training</h3>
+                    <p style="margin: 0;">Vision setup and targeting basics</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="chatbot" data-bot-name="SHBot">
+        <button class="chatbot-toggle" type="button" aria-expanded="false" aria-controls="chatbot-panel">Chat with SHBot</button>
+        <div class="chatbot-panel" id="chatbot-panel" role="dialog" aria-label="SHBot chat" aria-hidden="true">
+            <div class="chatbot-header">
+                <div class="chatbot-header-brand">
+                    <img class="chatbot-logo" src="images/SilverHornet.svg" alt="Silver Hornets logo">
+                    <div>
+                        <p class="chatbot-title">SHBot</p>
+                        <p class="chatbot-subtitle">Ask about the team</p>
+                    </div>
+                </div>
+                <button class="chatbot-close" type="button" aria-label="Close chat">✕</button>
+            </div>
+            <div class="chatbot-messages" aria-live="polite"></div>
+            <form class="chatbot-form" autocomplete="off">
+                <label class="sr-only" for="chatbot-input">Type your message</label>
+                <input class="chatbot-input" id="chatbot-input" name="message" type="text" placeholder="Ask about outreach, sponsors, or meetings" />
+                <button class="chatbot-send" type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Silver Hornets FTC Team 21331. All rights reserved.</p>
+            <p>Committed to FIRST principles and robotics excellence.</p>
+        </div>
+    </footer>
+
+    <script src="js/chatbot.js" defer></script>
+</body>
+</html>

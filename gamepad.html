@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gamepad Input</title>
+  <style>
+    body { font-family: "Segoe UI", Arial, sans-serif; margin: 0; background: #f5f8ff; color: #1f2a44; }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 24px 18px; }
+    section { background: #fff; border: 1px solid #dbe3f3; border-radius: 10px; padding: 16px; }
+    pre { background: #eef3ff; border: 1px solid #dbe3f3; border-radius: 8px; padding: 12px; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+    th, td { border: 1px solid #dbe3f3; padding: 8px; text-align: left; }
+    th { background: #f0f5ff; }
+    a { color: #1f5eff; text-decoration: none; }
+    .diagram { margin: 12px 0; border: 1px solid #dbe3f3; border-radius: 8px; padding: 10px; background: #fafcff; }
+    .flow { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .box { border: 1px solid #dbe3f3; border-radius: 8px; padding: 6px 10px; background: #fff; font-weight: 600; }
+    .arrow { color: #7a86a0; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <p><a href="basicTraining.html">← Back to training home</a></p>
+    <section>
+      <h1>Gamepad Input</h1>
+      <p><strong>Introduction:</strong> The gamepad is the driver’s control device. Your code reads sticks, triggers, and buttons each loop.</p>
+      <p><strong>Basic theory:</strong> Joystick values are analog (<code>-1.0</code> to <code>1.0</code>) and button values are digital (<code>true</code>/<code>false</code>). Read inputs first, then apply logic, then send telemetry.</p>
+      <div class="diagram">
+        <svg viewBox="0 0 700 170" width="100%" height="170" role="img" aria-label="Gamepad mapping diagram">
+          <rect x="220" y="30" width="260" height="100" rx="18" fill="#ffffff" stroke="#dbe3f3"></rect>
+          <circle cx="280" cy="80" r="20" fill="#eef3ff" stroke="#dbe3f3"></circle>
+          <circle cx="420" cy="80" r="8" fill="#d2ddff"></circle>
+          <circle cx="450" cy="65" r="8" fill="#d2ddff"></circle>
+          <circle cx="450" cy="95" r="8" fill="#d2ddff"></circle>
+          <circle cx="480" cy="80" r="8" fill="#d2ddff"></circle>
+          <text x="140" y="42" font-size="13" fill="#1f2a44">left_stick_y</text>
+          <line x1="175" y1="45" x2="265" y2="68" stroke="#7a86a0"></line>
+          <text x="515" y="65" font-size="13" fill="#1f2a44">A/B buttons</text>
+          <line x1="510" y1="70" x2="468" y2="78" stroke="#7a86a0"></line>
+        </svg>
+      </div>
+      <div class="flow">
+        <div class="box">gamepad1 values</div><div class="arrow">→</div>
+        <div class="box">Java decision</div><div class="arrow">→</div>
+        <div class="box">motor/servo command</div>
+      </div>
+      <pre><code>while (opModeIsActive()) {
+
+    double drive = -gamepad1.left_stick_y;
+
+    telemetry.addData("Drive Power", drive);
+
+    if (gamepad1.a) {
+        telemetry.addData("Button", "A Pressed");
+    }
+
+    telemetry.update();
+}</code></pre>
+      <table>
+        <thead><tr><th>Input</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td>left_stick_y</td><td>Drive / motor power</td></tr>
+          <tr><td>A button</td><td>Button event / servo command</td></tr>
+          <tr><td>B button</td><td>Servo command</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>
