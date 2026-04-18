@@ -32,44 +32,93 @@
           <div class="box">telemetry.update()</div>
         </div>
       </div>
-      <pre><code>import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
-
-@TeleOp(name = "Basic FTC Training")
-public class BasicFtcTraining extends LinearOpMode {
-    private DcMotor armMotor;
-    private Servo clawServo;
-
-    @Override
-    public void runOpMode() {
-        armMotor = hardwareMap.get(DcMotor.class, "armMotor");
-        clawServo = hardwareMap.get(Servo.class, "clawServo");
-
-        telemetry.addData("Status", "Initialized");
-        telemetry.addData("Hint", "Press Play to start");
-        telemetry.update();
-        waitForStart();
-
-        while (opModeIsActive()) {
-            double armPower = -gamepad1.left_stick_y;
-            armPower = Math.max(-0.8, Math.min(0.8, armPower));
-            armMotor.setPower(armPower);
-
-            if (gamepad1.a) {
-                clawServo.setPosition(1.0);
-            } else if (gamepad1.b) {
-                clawServo.setPosition(0.0);
+      <pre><code>
+        // This is the full example code for a beginner LinearOpMode.
+        import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+        import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+        import com.qualcomm.robotcore.hardware.DcMotor;
+        import com.qualcomm.robotcore.hardware.Servo;
+        
+        /**
+         * This is a basic TeleOp OpMode used for FTC training.
+         * It demonstrates the fundamental structure of a LinearOpMode, including:
+         * - Hardware declaration and initialization
+         * - The main OpMode loop
+         * - Basic control logic using gamepad inputs for a motor and a servo
+         * - Real-time feedback using telemetry
+         */
+        @TeleOp(name = "Basic FTC Training")
+        public class BasicFtcTraining extends LinearOpMode {
+        
+            // --- Hardware Declarations ---
+            // These variables will hold references to the actual hardware devices on the robot.
+            private DcMotor armMotor;
+            private Servo clawServo;
+        
+            @Override
+            public void runOpMode() {
+                // --- Initialization Phase ---
+                // This code runs when the "INIT" button is pressed on the Driver Hub.
+        
+                // Initialize hardware by looking them up in the configuration.
+                // The strings "armMotor" and "clawServo" must match the names in your robot configuration file.
+                armMotor = hardwareMap.get(DcMotor.class, "armMotor");
+                clawServo = hardwareMap.get(Servo.class, "clawServo");
+        
+                // Set the motor's initial behavior. 
+                // For example, we ensure it stops and resets its internal encoder if needed.
+                armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        
+                // Send a status message to the Driver Hub to confirm initialization.
+                telemetry.addData("Status", "Initialized");
+                telemetry.addData("Hint", "Press Play to start");
+                telemetry.update();
+        
+                // The OpMode pauses here until the "PLAY" button is pressed.
+                waitForStart();
+        
+                // --- Run Phase ---
+                // This code runs in a loop after the "PLAY" button is pressed until "STOP" is pressed.
+                while (opModeIsActive()) {
+        
+                    // --- Arm Motor Control ---
+                    // We use the left joystick Y-axis to control the arm motor power.
+                    // Pushing the stick up usually gives a negative value, so we negate it for intuitive control.
+                    double armPower = -gamepad1.left_stick_y;
+        
+                    // We use Math.max and Math.min to "clamp" the power between -0.8 and 0.8.
+                    // This is a safety measure to prevent the arm from moving too violently.
+                    armPower = Math.max(-0.8, Math.min(0.8, armPower));
+        
+                    // Apply the calculated power to the motor.
+                    armMotor.setPower(armPower);
+        
+        
+                    // --- Claw Servo Control ---
+                    // We use discrete buttons for simple, repeatable actions like opening or closing a claw.
+                    if (gamepad1.a) {
+                        // Set the servo to its maximum position (e.g., OPEN)
+                        clawServo.setPosition(1.0);
+                    } else if (gamepad1.b) {
+                        // Set the servo to its minimum position (e.g., CLOSED)
+                        clawServo.setPosition(0.0);
+                    }
+        
+        
+                    // --- Telemetry ---
+                    // Telemetry allows the robot to "talk" to the driver. This is crucial for debugging.
+                    telemetry.addData("Arm Power", "%.2f", armPower);
+                    telemetry.addData("Claw Position", "%.2f", clawServo.getPosition());
+                    telemetry.addData("A Button", gamepad1.a);
+                    telemetry.addData("B Button", gamepad1.b);
+                    
+                    // telemetry.update() must be called to send the accumulated data to the Driver Hub.
+                    telemetry.update();
+                }
             }
-
-            telemetry.addData("Arm Power", "%.2f", armPower);
-            telemetry.addData("Claw Position", "%.2f", clawServo.getPosition());
-            telemetry.addData("A Button", gamepad1.a);
-            telemetry.addData("B Button", gamepad1.b);
-            telemetry.update();
         }
-    }
+        
 }</code></pre>
     </section>
   </main>
