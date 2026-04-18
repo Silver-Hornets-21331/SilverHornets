@@ -45,18 +45,45 @@
         <div class="box">Java decision</div><div class="arrow">→</div>
         <div class="box">motor/servo command</div>
       </div>
-      <pre><code>while (opModeIsActive()) {
-
-    double drive = -gamepad1.left_stick_y;
-
-    telemetry.addData("Drive Power", drive);
-
-    if (gamepad1.a) {
-        telemetry.addData("Button", "A Pressed");
-    }
-
-    telemetry.update();
-}</code></pre>
+      <pre><code>
+        import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+        import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+        
+        /**
+         * This OpMode demonstrates how to read basic gamepad inputs.
+         * It follows the same structure as the Telemetry Demo.
+         */
+        @TeleOp(name="Gamepad Demo", group="Training")
+        public class GamepadDemo extends LinearOpMode {
+        
+            @Override
+            public void runOpMode() {
+                // --- Initialization Phase ---
+                telemetry.addData("Status", "Initialized. Press Play to start.");
+                telemetry.update();
+        
+                // Essential: wait for the driver to press the "PLAY" button.
+                waitForStart();
+        
+                // --- Run Phase ---
+                while (opModeIsActive()) {
+        
+                    // Read the vertical position of the left stick.
+                    double drive = -gamepad1.left_stick_y;
+        
+                    // Send the stick value to the Driver Hub.
+                    telemetry.addData("Drive Power", "%.2f", drive);
+        
+                    // Check if the 'A' button is being pressed.
+                    if (gamepad1.a) {
+                        telemetry.addData("Button", "A Pressed");
+                    }
+        
+                    // Essential: send the accumulated data to the Driver Hub.
+                    telemetry.update();
+                }
+            }
+        }</code></pre>
       <table>
         <thead><tr><th>Input</th><th>Action</th></tr></thead>
         <tbody>

@@ -40,23 +40,49 @@
         <div class="box">telemetry.addData()</div><div class="arrow">→</div>
         <div class="box">telemetry.update()</div>
       </div>
-      <pre><code>@TeleOp(name="Telemetry Demo", group="Training")
-public class TelemetryDemo extends LinearOpMode {
-
-    @Override
-    public void runOpMode() {
-
-        telemetry.addData("Status", "Waiting for start");
-        telemetry.update();
-
-        waitForStart();
-
-        while (opModeIsActive()) {
-            telemetry.addData("Runtime", getRuntime());
-            telemetry.update();
-        }
-    }
-}</code></pre>
+      <pre><code>import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+        import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+        
+        /**
+         * This OpMode demonstrates the basic use of Telemetry in FTC.
+         * Telemetry is used to send information from the robot to the Driver Hub,
+         * which is essential for debugging and providing feedback to drivers.
+         */
+        @TeleOp(name="Telemetry Demo", group="Training")
+        public class TelemetryDemo extends LinearOpMode {
+        
+            @Override
+            public void runOpMode() {
+                // --- Initialization Phase ---
+                // This code runs when the driver presses the "INIT" button.
+        
+                // .addData(caption, value) prepares a line of text to be sent.
+                // It does NOT send it immediately.
+                telemetry.addData("Status", "Waiting for start");
+                
+                // .update() sends all prepared data to the Driver Hub.
+                // Without this call, the driver won't see anything new.
+                telemetry.update();
+        
+                // Pause and wait for the driver to press the "PLAY" button.
+                waitForStart();
+        
+                // --- Run Phase ---
+                // This code runs in a loop after the "PLAY" button is pressed.
+                while (opModeIsActive()) {
+                    
+                    // Send the total time since the OpMode started.
+                    // This is useful for checking if the robot is "frozen" or lagging.
+                    telemetry.addData("Runtime", "%.2f seconds", getRuntime());
+                    
+                    // You can add multiple lines of data before calling update.
+                    telemetry.addLine("Robot is actively running!");
+                    
+                    // Finalize and send the data for this loop iteration.
+                    telemetry.update();
+                }
+            }
+        }</code></pre>
     </section>
   </main>
 </body>

@@ -37,26 +37,58 @@
         <div class="box">clamp power</div><div class="arrow">→</div>
         <div class="box">armMotor.setPower()</div>
       </div>
-      <pre><code>DcMotor armMotor;
-
-@Override
-public void runOpMode() {
-
-    armMotor = hardwareMap.get(DcMotor.class, "armMotor");
-    armMotor.setDirection(DcMotor.Direction.FORWARD);
-
-    waitForStart();
-
-    while (opModeIsActive()) {
-        double drive = -gamepad1.left_stick_y;
-        drive = Math.max(-0.8, Math.min(0.8, drive));
-
-        armMotor.setPower(drive);
-
-        telemetry.addData("Drive Power", drive);
-        telemetry.update();
-    }
-}</code></pre>
+      <pre><code>mport com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+        import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+        import com.qualcomm.robotcore.hardware.DcMotor;
+        
+        /**
+         * This OpMode demonstrates how to control a single DC motor
+         * using the gamepad left stick Y-axis.
+         */
+        @TeleOp(name="DC Motor Control Demo", group="Training")
+        public class DcMotorControlDemo extends LinearOpMode {
+        
+            private DcMotor armMotor;
+        
+            @Override
+            public void runOpMode() {
+                // --- Initialization Phase ---
+                
+                // Initialize the motor from the hardware map.
+                // Change "armMotor" to match the name in your robot configuration.
+                armMotor = hardwareMap.get(DcMotor.class, "armMotor");
+                
+                // Set the motor direction. 
+                // FORWARD is usually clockwise, REVERSE is counter-clockwise.
+                armMotor.setDirection(DcMotor.Direction.FORWARD);
+        
+                telemetry.addData("Status", "Initialized. Press Play to start.");
+                telemetry.update();
+        
+                // Wait for the driver to press the "PLAY" button.
+                waitForStart();
+        
+                // --- Run Phase ---
+                while (opModeIsActive()) {
+                    
+                    // Read the vertical position of the left stick.
+                    // Up is negative, so we negate it for intuitive control (Up = Positive Power).
+                    double power = -gamepad1.left_stick_y;
+                    
+                    // Clamp the power between -0.8 and 0.8 as a safety limit.
+                    power = Math.max(-0.8, Math.min(0.8, power));
+        
+                    // Apply the calculated power to the motor.
+                    armMotor.setPower(power);
+        
+                    // Send feedback to the Driver Hub.
+                    telemetry.addData("Motor Power", "%.2f", power);
+                    telemetry.update();
+                }
+            }
+        }
+        
+</code></pre>
       <p><strong>Power range:</strong> -1.0 reverse, 0.0 stop, 1.0 forward.</p>
     </section>
   </main>
