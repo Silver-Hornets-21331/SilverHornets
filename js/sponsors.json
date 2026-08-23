@@ -1,24 +1,24 @@
 [
   {
-    "name": "Test sponsor",
+    "name": "Genral Motors",
     "logo": "images/sponsors/sponsor-1.png",
     "website": "https://example.com",
     "description": "Supporting Silver Hornets robotics"
   },
   {
-    "name": "Innovation Industries",
+    "name": "Fabworks Inc.",
     "logo": "images/sponsors/sponsor-2.png",
     "website": "https://example.com",
     "description": "Supporting STEM education"
   },
   {
-    "name": "Future Robotics",
+    "name": "Polymaker",
     "logo": "images/sponsors/sponsor-3.png",
     "website": "https://example.com",
     "description": "Advancing robotics technology"
   },
   {
-    "name": "Local Business Partners",
+    "name": "Gene Has Foundation",
     "logo": "images/sponsors/sponsor-4.png",
     "website": "https://example.com",
     "description": "Community supporter"
