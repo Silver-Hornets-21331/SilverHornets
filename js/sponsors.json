@@ -1,38 +1,38 @@
 [
   {
-    "name": "Test sponsor",
-    "logo": "images/sponsors/sponsor-1.png",
-    "website": "https://example.com",
-    "description": "Supporting Silver Hornets robotics"
+    "name": "Fabworks",
+    "logo": "images/sponsors/fabworks.png",
+    "website": "https://fabworks.com",
+    "description": "Supporting Silver Hornets FTC Team 21331"
   },
   {
-    "name": "Innovation Industries",
-    "logo": "images/sponsors/sponsor-2.png",
-    "website": "https://example.com",
-    "description": "Supporting STEM education"
+    "name": "Gene Haas Foundation",
+    "logo": "images/sponsors/gene-haas-foundation.jpg",
+    "website": "https://www.ghft.org",
+    "description": "Supporting Silver Hornets FTC Team 21331"
   },
   {
-    "name": "Future Robotics",
-    "logo": "images/sponsors/sponsor-3.png",
-    "website": "https://example.com",
-    "description": "Advancing robotics technology"
+    "name": "General Motors",
+    "logo": "images/sponsors/general-motors.jpg",
+    "website": "https://www.gm.com",
+    "description": "Supporting Silver Hornets FTC Team 21331"
   },
   {
-    "name": "Local Business Partners",
-    "logo": "images/sponsors/sponsor-4.png",
-    "website": "https://example.com",
-    "description": "Community supporter"
+    "name": "Michigan Department of Education",
+    "logo": "images/sponsors/michigan-department-of-education.png",
+    "website": "https://www.michigan.gov/mde",
+    "description": "Supporting Silver Hornets FTC Team 21331"
   },
   {
-    "name": "Engineering Solutions LLC",
-    "logo": "images/sponsors/sponsor-5.png",
-    "website": "https://example.com",
-    "description": "Engineering excellence"
+    "name": "Polymaker",
+    "logo": "images/sponsors/polymaker.webp",
+    "website": "https://polymaker.com",
+    "description": "Supporting Silver Hornets FTC Team 21331"
   },
   {
-    "name": "Tech Academy",
-    "logo": "images/sponsors/sponsor-6.png",
-    "website": "https://example.com",
-    "description": "Education partner"
+    "name": "Sistar Mortgage",
+    "logo": "images/sponsors/sistar-mortgage.png",
+    "website": "https://www.sistarmortgage.com",
+    "description": "Supporting Silver Hornets FTC Team 21331"
   }
 ]
