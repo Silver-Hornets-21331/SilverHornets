@@ -4,7 +4,7 @@
       "season": "2026-2027 Season",
       "name": "Current Robot",
       "description": "Our latest competitive robot featuring cutting-edge design and innovation.",
-      "image": "images/robot-2024.png",
+      "image": "images/robot-2025.png",
         "features": [
         "Advanced(limeLight) vision system", 
         "Turret-mounted manipulator",   
@@ -26,7 +26,7 @@
       "season": "2024-2025 Season",
       "name": "Legacy Robot",
       "description": "The foundation of our program's competitive excellence.",
-      "image": "images/robot-2023.jpg",
+      "image": "images/robot-2024.png",
       "features": [
        "Dual-arm manipulator",
         "Quick release mechanism",
