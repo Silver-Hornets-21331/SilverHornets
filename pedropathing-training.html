@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PedroPathing 3.0 Training - Silver Hornets FTC Team 21331</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img class="logo-image" src="images/2025-04-28%20-%20SIlver%20Hornets%20Logo.png" alt="Silver Hornets logo">
+                <span>Silver Hornets</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="sponsors.html">Sponsors</a></li>
+                <li><a href="outreach.html">Outreach</a></li>
+                <li><a href="basicTraining.html" class="active">Training</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Member Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1>PedroPathing 3.0</h1>
+        <p class="page-subtitle">Build and follow a field path with the Pedro 3 API.</p>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <p>PedroPathing is an FTC autonomous path-following library. Version 3 is a major rewrite, so use the 3.x API examples on this page only with a Pedro 3 project. Pedro still needs a tuned drivetrain and localizer before its paths can be reliable.</p>
+
+            <h2>1. Install and prepare</h2>
+            <p>The Pedro Quickstart is the recommended way to start a new project. For a manual install, the current Pedro documentation lists these dependencies in <code>build.dependencies.gradle</code>:</p>
+            <pre><code>repositories {
+    maven { url 'https://repo.dairy.foundation/releases/' }
+}
+
+dependencies {
+    implementation 'com.pedropathing:revhub:3.0.2'
+    implementation 'com.pedropathing:tuning:1.0.0'
+}</code></pre>
+            <p>Sync Gradle and copy the Pedro configuration package from the Quickstart into your TeamCode project. The generated <code>Constants.create(hardwareMap)</code> method must match your drivetrain and localization hardware.</p>
+
+            <h2>2. Understand poses</h2>
+            <p>A <code>Pose</code> is a field position and robot heading: x, y, and heading. Pedro uses its own field coordinate system. Use one consistent unit (normally inches), confirm the origin and alliance orientation in the official coordinate guide, and make the start pose match the robot's actual placement.</p>
+            <pre><code>import com.pedropathing.api.PoseFactory;
+import com.pedropathing.math.Pose;
+
+private final PoseFactory poses = PoseFactory.degrees();
+private final Pose startPose = poses.of(24, 24, 0);
+private final Pose parkPose = poses.of(48, 48, 90);</code></pre>
+            <p><code>PoseFactory.degrees()</code> makes headings degrees. Use <code>PoseFactory.radians()</code> if your project uses radians instead; do not mix the two.</p>
+
+            <h2>3. Create a path</h2>
+            <p>Pedro 3 provides path helpers in <code>Paths</code>. A line connects two poses; the interpolation sets how the robot's heading changes along that path.</p>
+            <pre><code>import com.pedropathing.paths.Path;
+import static com.pedropathing.api.Paths.line;
+
+private Path startToPark() {
+    return line(startPose, parkPose).linear(startPose, parkPose);
+}</code></pre>
+            <p>For curved routes, use <code>curve(start, control, end)</code> and tune the control pose in the visualizer. Always test the path with the robot safely supported or at low speed before running it on the field.</p>
+
+            <h2>4. Follow it in an autonomous OpMode</h2>
+            <p>Pedro recommends Ivy to schedule path-following commands. Ivy is an additional library; install and configure it using the official Ivy documentation before using these imports.</p>
+            <pre><code>import com.pedropathing.follower.Follower;
+import com.pedropathing.ivy.Command;
+import com.pedropathing.ivy.Scheduler;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import org.firstinspires.ftc.teamcode.pedro.Constants;
+import static com.pedropathing.ivy.Scheduler.schedule;
+import static com.pedropathing.ivy.pedro.PedroCommands.follow;
+
+@Autonomous(name = "Pedro 3 Path Test")
+public class PedroPathTest extends OpMode {
+    private Follower follower;
+
+    @Override
+    public void init() {
+        Scheduler.reset();
+        follower = Constants.create(hardwareMap);
+        follower.setPose(startPose);
+    }
+
+    private Command autoRoutine() {
+        return follow(follower, startToPark());
+    }
+
+    @Override
+    public void start() {
+        schedule(autoRoutine());
+    }
+
+    @Override
+    public void loop() {
+        follower.update();
+        Scheduler.execute();
+        telemetry.addData("X", follower.pose().x());
+        telemetry.addData("Y", follower.pose().y());
+        telemetry.addData("Mode", follower.mode());
+        telemetry.addData("Path remaining", follower.remainingDistance());
+        telemetry.update();
+    }
+}</code></pre>
+            <p>This is a lesson fragment, not a drop-in class: include the pose fields and <code>startToPark()</code> method above in the same OpMode, and use the package path generated by your project for <code>Constants</code>.</p>
+
+            <h2>5. Tune and debug</h2>
+            <ul>
+                <li>Tune the drivetrain, localizer, and algorithm before increasing path speed.</li>
+                <li>Verify the displayed pose while pushing the robot by hand; fix localization before tuning paths.</li>
+                <li>Use <code>follower.isBusy()</code>, <code>follower.completion()</code>, and <code>follower.remainingDistance()</code> to understand progress.</li>
+                <li>Keep telemetry small so it does not slow the control loop.</li>
+                <li>Pedro 3 adds Foresight, PoseFactory, redesigned paths, AutoTune, and built-in logging; these replace older version-specific examples.</li>
+            </ul>
+
+            <h2>Practice</h2>
+            <ul>
+                <li>Draw a straight path from the starting pose to a nearby point and compare the robot's actual pose with its estimate.</li>
+                <li>Change the end heading while keeping the same end position.</li>
+                <li>After the line path is dependable, add one curve control pose and compare both routes.</li>
+            </ul>
+
+            <h2>References</h2>
+            <ul>
+                <li><a href="https://pedropathing.com/docs/pathing/pedro3" target="_blank" rel="noopener noreferrer">What's New with Pedro 3</a></li>
+                <li><a href="https://pedropathing.com/docs/pathing/installation" target="_blank" rel="noopener noreferrer">Installation and Quickstart</a></li>
+                <li><a href="https://pedropathing.com/docs/pathing/tuning" target="_blank" rel="noopener noreferrer">Tuning</a></li>
+                <li><a href="https://pedropathing.com/docs/pathing/guide/setting-up-auto" target="_blank" rel="noopener noreferrer">Setting Up an Autonomous</a></li>
+                <li><a href="https://pedropathing.com/docs/pathing/guide/pose-creation" target="_blank" rel="noopener noreferrer">Pose Creation and Coordinates</a></li>
+                <li><a href="https://pedropathing.com/docs/pathing/guide/path-creation" target="_blank" rel="noopener noreferrer">Path Creation</a></li>
+                <li><a href="https://pedropathing.com/docs/pathing/guide/auto-usage" target="_blank" rel="noopener noreferrer">Autonomous Usage</a></li>
+                <li><a href="https://pedropathing.com/docs/ivy" target="_blank" rel="noopener noreferrer">Ivy Documentation</a></li>
+            </ul>
+
+            <p><a href="basicTraining.html">Back to training modules</a> | <a href="limelight-training.html">Limelight training</a></p>
+        </div>
+    </section>
+
+    <div class="chatbot" data-bot-name="SHBot">
+        <button class="chatbot-toggle" type="button" aria-expanded="false" aria-controls="chatbot-panel">Chat with SHBot</button>
+        <div class="chatbot-panel" id="chatbot-panel" role="dialog" aria-label="SHBot chat" aria-hidden="true">
+            <div class="chatbot-header">
+                <div class="chatbot-header-brand">
+                    <img class="chatbot-logo" src="images/SilverHornet.svg" alt="Silver Hornets logo">
+                    <div>
+                        <p class="chatbot-title">SHBot</p>
+                        <p class="chatbot-subtitle">Ask about the team</p>
+                    </div>
+                </div>
+                <button class="chatbot-close" type="button" aria-label="Close chat">✕</button>
+            </div>
+            <div class="chatbot-messages" aria-live="polite"></div>
+            <form class="chatbot-form" autocomplete="off">
+                <label class="sr-only" for="chatbot-input">Type your message</label>
+                <input class="chatbot-input" id="chatbot-input" name="message" type="text" placeholder="Ask about outreach, sponsors, or meetings" />
+                <button class="chatbot-send" type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Silver Hornets FTC Team 21331. All rights reserved.</p>
+            <p>Committed to FIRST principles and robotics excellence.</p>
+        </div>
+    </footer>
+
+    <script src="js/chatbot.js" defer></script>
+</body>
+</html>

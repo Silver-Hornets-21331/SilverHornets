@@ -26,21 +26,17 @@
         </div>
     </nav>
 
-        <div class="section">
-            <h1>Limelight 3A Vision Training</h1>
-            <h3>Helping FTC Robots See the Field</h3>
-            <p>
-                The <b>Limelight 3A</b> is a smart vision camera used in robotics to help your robot
-                detect objects, find targets, and line up automatically. It uses LEDs, a fast processor,
-                and built‑in software to track things on the field.
-            </p>
-        </div>
+        <header class="page-header">
+            <h1>Limelight 3A FTC Training</h1>
+            <p class="page-subtitle">Configure vision, read AprilTag results, and use camera data safely in robot code.</p>
+        </header>
 
         <div class="section">
             <h2>1. What Is the Limelight 3A?</h2>
             <p>
-                The Limelight 3A is a small green‑glowing camera that helps your robot “see.”
-                It can detect:
+                The Limelight 3A is a USB vision camera with its own processor and browser-based configuration interface.
+                It can run AprilTag, color, barcode, and neural-network pipelines. It does not have built-in LED illumination;
+                check the camera image and exposure settings for your lighting conditions.
             </p>
             <ul>
                 <li>AprilTags</li>
@@ -50,35 +46,30 @@
             </ul>
 
             <p>
-                FTC teams use it mostly for <b>Autonomous</b> to help the robot know where it is
-                and what it should do next.
+                FTC teams can use its target measurements for alignment or use its AprilTag localization output as one
+                input to autonomous navigation. Camera results are measurements, not a complete robot-control system.
             </p>
         </div>
 
         <div class="section">
             <h2>2. Why Teams Use Limelight</h2>
             <ul>
-                <li>It finds AprilTags very accurately</li>
-                <li>It works even in bright or dark lighting</li>
-                <li>It gives your robot real‑time position data</li>
-                <li>It reduces guesswork in autonomous</li>
-                <li>It’s easier than writing your own vision code</li>
+                <li>Runs vision pipelines on the camera instead of doing all image processing on the Control Hub.</li>
+                <li>Can report target offsets and AprilTag detections.</li>
+                <li>Can estimate field pose when the correct AprilTag map and camera calibration are configured.</li>
+                <li>Still requires testing for lighting, mounting, latency, and field conditions.</li>
             </ul>
         </div>
 
         <div class="section">
             <h2>3. How Limelight Connects to Your Robot</h2>
-            <p>
-                The Limelight 3A connects to your FTC robot using:
-            </p>
+            <p>For FTC, connect the Limelight 3A to the Control Hub with a USB-C-to-USB-A cable in the blue USB 3.0 port.</p>
             <ul>
-                <li><b>USB</b> (for power)</li>
-                <li><b>Ethernet</b> (for data)</li>
+                <li>Connect it to a computer to configure it at <code>http://limelight.local:5801</code> or through Limelight Hardware Manager.</li>
+                <li>Set the team number, configure a pipeline, and restart the vision client.</li>
+                <li>In the Driver Station Robot Configuration, scan for the device. It appears as an Ethernet Device; rename it <code>limelight</code>.</li>
+                <li>Use that configured name in <code>hardwareMap</code>. The 3A uses USB-C and has no RJ45 port.</li>
             </ul>
-
-            <p>
-                Your robot reads the Limelight’s data using a network table or JSON output.
-            </p>
         </div>
 
         <div class="section">
@@ -88,9 +79,10 @@
             <ul>
                 <li><b>tx</b> – horizontal offset (left/right)</li>
                 <li><b>ty</b> – vertical offset (up/down)</li>
-                <li><b>ta</b> – target area (how big the object looks)</li>
-                <li><b>AprilTag ID</b> – which tag it sees</li>
-                <li><b>Robot pose</b> – where the robot is on the field</li>
+                <li><b>tx</b> and <b>ty</b> are horizontal and vertical target offsets in degrees.</li>
+                <li><b>ta</b> is target area as a percentage of the image.</li>
+                <li>Fiducial results include AprilTag IDs and per-tag measurements.</li>
+                <li>Robot field pose is available only when the AprilTag pipeline, field map, and camera pose are configured.</li>
             </ul>
 
             <p>
@@ -99,43 +91,47 @@
         </div>
 
         <div class="section">
-            <h2>5. Simple FTC Java Example</h2>
-            <p>
-                This example shows how your robot might read Limelight data.
-                (This is simplified for teaching.)
-            </p>
+            <h2>5. Read Results in FTC Java</h2>
+            <p>This LinearOpMode example polls the camera and reports valid target measurements. Set the pipeline index to the pipeline configured in the Limelight web interface.</p>
+            <pre><code>import com.qualcomm.hardware.limelightvision.LLResult;
+import com.qualcomm.hardware.limelightvision.Limelight3A;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-            <pre>
-// Example: reading Limelight values
-double tx = limelight.getTX();  // left/right offset
-double ty = limelight.getTY();  // up/down offset
-double ta = limelight.getTA();  // target area
+@TeleOp(name = "Limelight Check")
+public class LimelightCheck extends LinearOpMode {
+    @Override
+    public void runOpMode() throws InterruptedException {
+        Limelight3A limelight = hardwareMap.get(Limelight3A.class, "limelight");
+        limelight.setPollRateHz(100);
+        limelight.pipelineSwitch(0);
+        limelight.start();
 
-// If the target is left, turn left
-if (tx < -2) {
-        leftDrive.setPower(-0.2);
-        rightDrive.setPower(0.2);
-}
+        telemetry.addLine("Limelight ready");
+        telemetry.update();
+        waitForStart();
 
-// If the target is right, turn right
-else if (tx > 2) {
-        leftDrive.setPower(0.2);
-        rightDrive.setPower(-0.2);
-}
+        while (opModeIsActive()) {
+            LLResult result = limelight.getLatestResult();
+            if (result != null &amp;&amp; result.isValid()) {
+                telemetry.addData("tx (degrees)", result.getTx());
+                telemetry.addData("ty (degrees)", result.getTy());
+                telemetry.addData("ta (percent)", result.getTa());
+            } else {
+                telemetry.addLine("No valid target");
+            }
+            telemetry.update();
+        }
 
-// If centered, drive forward
-else {
-        leftDrive.setPower(0.3);
-        rightDrive.setPower(0.3);
-}
-            </pre>
-
+        limelight.stop();
+    }
+}</code></pre>
             <div class="exercise">
                 <b>Try this:</b>
                 <ul>
-                    <li>Change the turn speed from 0.2 to 0.1</li>
-                    <li>Add a condition to stop if <code>ta</code> is too large</li>
-                    <li>Add telemetry to print <code>tx</code> and <code>ty</code></li>
+                    <li>Change the pipeline index to match a second configured pipeline.</li>
+                    <li>Record tx while moving the robot left and right; note the sign and units.</li>
+                    <li>Keep the robot stationary and verify that no-target frames never trigger drive commands.</li>
                 </ul>
             </div>
         </div>
@@ -151,44 +147,53 @@ else {
                 <li>Score more accurately</li>
             </ul>
 
-            <p>Example: reading the AprilTag ID</p>
+                <p>AprilTag detections are returned as a list. Check the configured pipeline and use the actual tag IDs for your field/game, rather than assuming IDs 1, 2, and 3.</p>
+                <pre><code>import com.qualcomm.hardware.limelightvision.LLResultTypes;
+        import java.util.List;
 
-            <pre>
-int tagID = limelight.getAprilTagID();
-
-if (tagID == 1) {
-        // left spike mark
-} else if (tagID == 2) {
-        // center spike mark
-} else if (tagID == 3) {
-        // right spike mark
-}
-            </pre>
+        List&lt;LLResultTypes.FiducialResult&gt; tags = result.getFiducialResults();
+        for (LLResultTypes.FiducialResult tag : tags) {
+            telemetry.addData("AprilTag ID", tag.getFiducialId());
+            telemetry.addData("Tag tx", tag.getTargetXDegrees());
+            telemetry.addData("Tag ty", tag.getTargetYDegrees());
+        }</code></pre>
         </div>
 
         <div class="section">
-            <h2>7. Practice Challenges</h2>
+            <h2>7. Localization and Safe Testing</h2>
+            <p>For field localization, enable Full 3D in the AprilTag pipeline and configure the camera's position relative to the robot. MegaTag 2 also requires current robot yaw to be sent to Limelight before reading its pose.</p>
+            <pre><code>// Send the robot's current heading in degrees before reading MegaTag 2 pose.
+limelight.updateRobotOrientation(robotYawDegrees);
+LLResult result = limelight.getLatestResult();
+if (result != null &amp;&amp; result.isValid()) {
+    Pose3D fieldPose = result.getBotpose_MT2();
+    if (fieldPose != null) {
+        telemetry.addData("Field pose", fieldPose);
+    }
+}</code></pre>
+            <p>Do not combine this pose with your autonomous localizer until you have checked coordinate frames, camera mounting, heading conventions, and latency against known field positions.</p>
+        </div>
+
+        <div class="section">
+            <h2>8. Practice Challenges</h2>
             <ul>
                 <li>Use Limelight to center your robot on a target</li>
-                <li>Use AprilTags to choose between 3 autonomous paths</li>
-                <li>Make the robot stop when it gets close to the target</li>
+                <li>Use the detected fiducial ID to select between team-defined autonomous options</li>
+                <li>Stop the robot safely whenever the result is missing or invalid</li>
                 <li>Print Limelight values on telemetry</li>
             </ul>
         </div>
 
         <div class="section">
-            <h2>8. Limelight 3A Reference Link</h2>
+            <h2>9. References</h2>
             <p>
-                <b>Official Limelight Website:</b><br>
-                <a href="https://limelightvision.io" target="_blank" rel="noopener noreferrer">
-                    https://limelightvision.io
-                </a>
+                <a href="https://docs.limelightvision.io/docs/docs-limelight/getting-started/limelight-3a" target="_blank" rel="noopener noreferrer">Limelight 3A Quick Start</a>
             </p>
             <p>
-                <b>Limelight 3A Product Page:</b><br>
-                <a href="https://limelightvision.io/products/limelight-3" target="_blank" rel="noopener noreferrer">
-                    https://limelightvision.io/products/limelight-3
-                </a>
+                <a href="https://docs.limelightvision.io/docs/docs-limelight/apis/ftc-programming" target="_blank" rel="noopener noreferrer">Official FTC Java Programming Guide</a>
+            </p>
+            <p>
+                <a href="https://github.com/FIRST-Tech-Challenge/FtcRobotController/blob/master/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/external/samples/SensorLimelight3A.java" target="_blank" rel="noopener noreferrer">FTC SDK SensorLimelight3A Sample</a>
             </p>
         </div>
 

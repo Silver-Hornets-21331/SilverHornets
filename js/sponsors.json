@@ -1,11 +1,5 @@
 [
   {
-    "name": "Fabworks",
-    "logo": "images/sponsors/fabworks.png",
-    "website": "https://fabworks.com",
-    "description": "Supporting Silver Hornets FTC Team 21331"
-  },
-  {
     "name": "Gene Haas Foundation",
     "logo": "images/sponsors/gene-haas-foundation.jpg",
     "website": "https://www.ghft.org",
@@ -15,6 +9,12 @@
     "name": "General Motors",
     "logo": "images/sponsors/general-motors.jpg",
     "website": "https://www.gm.com",
+    "description": "Supporting Silver Hornets FTC Team 21331"
+  },
+  {
+    "name": "Fabworks",
+    "logo": "images/sponsors/fabworks.png",
+    "website": "https://fabworks.com",
     "description": "Supporting Silver Hornets FTC Team 21331"
   },
   {
